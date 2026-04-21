@@ -14,12 +14,16 @@ export default function TopNav() {
   const navigate = useNavigate()
 
   async function handleSignOut() {
-    await signOut()
+    try {
+      await signOut()
+    } catch (err) {
+      console.error('Sign out failed:', err)
+    }
     navigate('/login')
   }
 
   return (
-    <nav className="hidden md:flex items-center bg-surface border-b border-gray-800 px-6 h-14 gap-1">
+    <nav aria-label="Main navigation" className="hidden md:flex items-center bg-surface border-b border-gray-800 px-6 h-14 gap-1">
       <span className="text-white font-semibold mr-8">💰 Finance</span>
       {links.map(({ to, label }) => (
         <NavLink
@@ -36,12 +40,12 @@ export default function TopNav() {
         </NavLink>
       ))}
       <div className="ml-auto flex items-center gap-2">
-        <NavLink to="/settings" className={({ isActive }) =>
+        <NavLink to="/settings" aria-label="Settings" className={({ isActive }) =>
           `p-2 rounded-md transition-colors ${isActive ? 'text-accent' : 'text-gray-400 hover:text-white'}`
         }>
           <Settings size={18} />
         </NavLink>
-        <button onClick={handleSignOut} className="p-2 text-gray-400 hover:text-white transition-colors">
+        <button onClick={handleSignOut} aria-label="Sign out" className="p-2 text-gray-400 hover:text-white transition-colors">
           <LogOut size={18} />
         </button>
       </div>
