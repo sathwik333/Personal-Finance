@@ -29,6 +29,7 @@ export default function Router() {
           <Route path="categories" element={<Categories />} />
           <Route path="settings" element={<Settings />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   )
