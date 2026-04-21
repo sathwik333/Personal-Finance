@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange } from './utils'
+import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange, calcBalance } from './utils'
 
 describe('formatCurrency', () => {
   it('formats positive number as USD', () => {
@@ -45,5 +45,26 @@ describe('getMonthRange', () => {
     const { from, to } = getMonthRange(2026, 3) // April (0-indexed)
     expect(from).toBe('2026-04-01')
     expect(to).toBe('2026-04-30')
+  })
+})
+
+describe('getWeekRange', () => {
+  it('returns Monday-to-Sunday range for a mid-week date', () => {
+    const { from, to } = getWeekRange(new Date(2026, 3, 22)) // Wednesday Apr 22
+    expect(from).toBe('2026-04-20') // Monday
+    expect(to).toBe('2026-04-26')   // Sunday
+  })
+})
+
+describe('calcBalance', () => {
+  it('returns 0 for empty array', () => {
+    expect(calcBalance([])).toBe(0)
+  })
+  it('adds income and subtracts expenses', () => {
+    const txs = [
+      { amount: 100, type: 'income' },
+      { amount: 30, type: 'expense' },
+    ]
+    expect(calcBalance(txs)).toBe(70)
   })
 })
