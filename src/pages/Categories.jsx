@@ -6,7 +6,7 @@ const COLORS = ['#F59E0B','#3B82F6','#8B5CF6','#EC4899','#EF4444','#10B981','#F9
 const EMOJIS = ['🍔','🚗','🛵','🛍️','🧾','🏥','🎬','📚','📦','💊','🏋️','✈️','🎮','🍺','☕','🐾','🏠','💡']
 
 export default function Categories() {
-  const { systemCategories, customCategories, loading, addCategory, deleteCategory } = useCategories()
+  const { systemCategories, customCategories, loading, error: fetchError, addCategory, deleteCategory } = useCategories()
   const [showForm, setShowForm] = useState(false)
   const [name, setName] = useState('')
   const [icon, setIcon] = useState('📦')
@@ -42,6 +42,7 @@ export default function Categories() {
   }
 
   if (loading) return <p className="text-gray-400 py-8 text-center">Loading...</p>
+  if (fetchError) return <p className="text-expense py-8 text-center">Failed to load categories. Please refresh.</p>
 
   return (
     <div className="space-y-6 py-4">
@@ -58,8 +59,9 @@ export default function Categories() {
       {showForm && (
         <form onSubmit={handleAdd} className="bg-surface rounded-xl p-4 space-y-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Name</label>
+            <label htmlFor="cat-name" className="block text-sm text-gray-400 mb-1">Name</label>
             <input
+              id="cat-name"
               value={name}
               onChange={e => setName(e.target.value)}
               className="w-full bg-base border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent"
@@ -83,6 +85,8 @@ export default function Categories() {
             <div className="flex gap-2">
               {COLORS.map(c => (
                 <button key={c} type="button" onClick={() => setColor(c)}
+                  aria-label={`Select color ${c}`}
+                  aria-pressed={color === c}
                   className={`w-7 h-7 rounded-full ${color === c ? 'ring-2 ring-white ring-offset-2 ring-offset-surface' : ''}`}
                   style={{ backgroundColor: c }}
                 />
@@ -95,7 +99,13 @@ export default function Categories() {
               className="bg-accent hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg">
               {saving ? 'Saving...' : 'Save'}
             </button>
-            <button type="button" onClick={() => setShowForm(false)}
+            <button type="button" onClick={() => {
+              setShowForm(false)
+              setName('')
+              setIcon('📦')
+              setColor('#6366F1')
+              setError('')
+            }}
               className="text-gray-400 hover:text-white text-sm px-4 py-2 rounded-lg">
               Cancel
             </button>
@@ -106,13 +116,16 @@ export default function Categories() {
       <section>
         <h2 className="text-sm font-medium text-gray-400 mb-3">Default</h2>
         <div className="bg-surface rounded-xl divide-y divide-gray-800">
-          {systemCategories.map(cat => (
-            <div key={cat.id} className="flex items-center gap-3 px-4 py-3">
-              <span className="text-xl">{cat.icon}</span>
-              <span className="text-white flex-1">{cat.name}</span>
-              <span className="w-4 h-4 rounded-full" style={{ backgroundColor: cat.color }} />
-            </div>
-          ))}
+          {systemCategories.length === 0
+            ? <p className="px-4 py-3 text-sm text-gray-500">No default categories found.</p>
+            : systemCategories.map(cat => (
+                <div key={cat.id} className="flex items-center gap-3 px-4 py-3">
+                  <span className="text-xl">{cat.icon}</span>
+                  <span className="text-white flex-1">{cat.name}</span>
+                  <span className="w-4 h-4 rounded-full" style={{ backgroundColor: cat.color }} />
+                </div>
+              ))
+          }
         </div>
       </section>
 

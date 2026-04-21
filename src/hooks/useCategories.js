@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from './useAuth'
 
@@ -6,22 +6,30 @@ export function useCategories() {
   const { user } = useAuth()
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  useEffect(() => {
+  const fetchCategories = useCallback(async () => {
     if (!user) return
-    fetchCategories()
-  }, [user])
-
-  async function fetchCategories() {
     setLoading(true)
+    setError(null)
     const { data, error } = await supabase
       .from('categories')
       .select('*')
       .or(`user_id.eq.${user.id},user_id.is.null`)
       .order('name')
-    if (!error) setCategories(data)
+    if (error) {
+      setError(error)
+      setLoading(false)
+      return
+    }
+    setCategories(data)
     setLoading(false)
-  }
+  }, [user])
+
+  useEffect(() => {
+    if (!user) return
+    fetchCategories()
+  }, [fetchCategories])
 
   async function addCategory({ name, icon, color }) {
     const { data, error } = await supabase
@@ -43,5 +51,5 @@ export function useCategories() {
   const systemCategories = categories.filter(c => c.user_id === null)
   const customCategories = categories.filter(c => c.user_id !== null)
 
-  return { categories, systemCategories, customCategories, loading, addCategory, deleteCategory, refetch: fetchCategories }
+  return { categories, systemCategories, customCategories, loading, error, addCategory, deleteCategory, refetch: fetchCategories }
 }
