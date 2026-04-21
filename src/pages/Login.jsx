@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 
 export default function Login() {
   const { signIn } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const infoMessage = location.state?.message ?? ''
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -29,32 +31,37 @@ export default function Login() {
       <div className="w-full max-w-sm">
         <h1 className="text-2xl font-bold text-white mb-1">Welcome back</h1>
         <p className="text-gray-400 mb-8">Sign in to your finance tracker</p>
+        {infoMessage && <p className="text-income text-sm mb-4">{infoMessage}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Email</label>
+            <label htmlFor="email" className="block text-sm text-gray-400 mb-1">Email</label>
             <input
+              id="email"
               type="email"
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent"
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm text-gray-400 mb-1">Password</label>
             <input
+              id="password"
               type="password"
               required
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent"
               placeholder="••••••••"
+              autoComplete="current-password"
             />
           </div>
 
-          {error && <p className="text-expense text-sm">{error}</p>}
+          <p role="alert" className="text-expense text-sm min-h-[1.25rem]">{error}</p>
 
           <button
             type="submit"

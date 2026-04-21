@@ -13,13 +13,19 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (password !== confirm) { setError('Passwords do not match'); return }
     if (password.length < 6) { setError('Password must be at least 6 characters'); return }
+    if (password !== confirm) { setError('Passwords do not match'); return }
     setError('')
     setLoading(true)
     try {
-      await signUp(email, password)
-      navigate('/')
+      const result = await signUp(email, password)
+      if (result?.session) {
+        navigate('/')
+      } else {
+        // Email confirmation required
+        setError('')
+        navigate('/login', { state: { message: 'Check your email to confirm your account, then sign in.' } })
+      }
     } catch (err) {
       setError(err.message)
     } finally {
@@ -35,40 +41,46 @@ export default function Signup() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Email</label>
+            <label htmlFor="email" className="block text-sm text-gray-400 mb-1">Email</label>
             <input
+              id="email"
               type="email"
               required
               value={email}
               onChange={e => setEmail(e.target.value)}
               className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent"
               placeholder="you@example.com"
+              autoComplete="email"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Password</label>
+            <label htmlFor="password" className="block text-sm text-gray-400 mb-1">Password</label>
             <input
+              id="password"
               type="password"
               required
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent"
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
           <div>
-            <label className="block text-sm text-gray-400 mb-1">Confirm password</label>
+            <label htmlFor="confirm" className="block text-sm text-gray-400 mb-1">Confirm password</label>
             <input
+              id="confirm"
               type="password"
               required
               value={confirm}
               onChange={e => setConfirm(e.target.value)}
               className="w-full bg-surface border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-accent"
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
-          {error && <p className="text-expense text-sm">{error}</p>}
+          <p role="alert" className="text-expense text-sm min-h-[1.25rem]">{error}</p>
 
           <button
             type="submit"
