@@ -21,7 +21,12 @@ export default function Transactions() {
 
   async function handleDelete(id) {
     if (!confirm('Delete this transaction?')) return
-    await deleteTransaction(id)
+    try {
+      await deleteTransaction(id)
+    } catch (err) {
+      console.error('Delete failed:', err)
+      alert('Failed to delete transaction. Please try again.')
+    }
   }
 
   function handleEdit(tx) {
@@ -35,6 +40,7 @@ export default function Transactions() {
     } else {
       await addTransaction(data)
     }
+    handleClose()
   }
 
   function handleClose() {
@@ -47,7 +53,7 @@ export default function Transactions() {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Transactions</h1>
         <button
-          onClick={() => setShowForm(true)}
+          onClick={() => { setEditing(null); setShowForm(true) }}
           className="flex items-center gap-1 bg-accent hover:bg-indigo-500 text-white text-sm font-medium px-3 py-2 rounded-lg"
         >
           <Plus size={16} aria-hidden="true" /> Add
