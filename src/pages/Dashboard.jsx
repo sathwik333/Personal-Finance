@@ -127,9 +127,9 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Recent transactions */}
+      {/* Recent transactions — extra bottom padding so FAB never covers last row */}
       <div
-        className="animate-fade-up"
+        className="animate-fade-up pb-4"
         style={{ animationDelay: '200ms', animationFillMode: 'both' }}
       >
         <h2 className="text-sm font-semibold text-white/70 mb-3 flex items-center gap-2">
@@ -166,7 +166,7 @@ export default function Dashboard() {
       <button
         onClick={() => { setEditing(null); setShowForm(true) }}
         aria-label="Add transaction"
-        className="fixed bottom-24 right-5 md:bottom-8 md:right-8 w-14 h-14 rounded-2xl flex items-center justify-center z-30 transition-all duration-200 active:scale-95 shadow-lg btn-primary"
+        className="fixed bottom-28 right-4 md:bottom-8 md:right-8 w-14 h-14 rounded-2xl flex items-center justify-center z-30 transition-all duration-200 active:scale-95 shadow-lg btn-primary"
         style={{ boxShadow: '0 8px 30px rgba(124,58,237,0.5)' }}
       >
         <Plus size={22} aria-hidden="true" />
