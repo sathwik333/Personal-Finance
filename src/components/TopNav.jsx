@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { LogOut, Settings, TrendingUp } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
@@ -12,8 +13,24 @@ const links = [
 export default function TopNav() {
   const { signOut } = useAuth()
   const navigate = useNavigate()
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [signingOut, setSigningOut] = useState(false)
+  const popoverRef = useRef(null)
+  const btnRef = useRef(null)
 
-  async function handleSignOut() {
+  useEffect(() => {
+    if (!showConfirm) return
+    function handleClick(e) {
+      if (popoverRef.current && !popoverRef.current.contains(e.target) && !btnRef.current.contains(e.target)) {
+        setShowConfirm(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [showConfirm])
+
+  async function handleConfirmSignOut() {
+    setSigningOut(true)
     try { await signOut() } catch {}
     navigate('/login')
   }
@@ -53,7 +70,7 @@ export default function TopNav() {
         </NavLink>
       ))}
 
-      <div className="ml-auto flex items-center gap-1">
+      <div className="ml-auto flex items-center gap-1 relative">
         <NavLink
           to="/settings"
           aria-label="Settings"
@@ -65,13 +82,59 @@ export default function TopNav() {
         >
           <Settings size={17} aria-hidden="true" />
         </NavLink>
+
         <button
-          onClick={handleSignOut}
+          ref={btnRef}
+          onClick={() => setShowConfirm(s => !s)}
           aria-label="Sign out"
-          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-all duration-200 cursor-pointer"
+          aria-expanded={showConfirm}
+          className={`p-2 rounded-lg transition-all duration-200 cursor-pointer ${
+            showConfirm ? 'text-expense bg-expense/10' : 'text-gray-400 hover:text-expense hover:bg-expense/10'
+          }`}
         >
           <LogOut size={17} aria-hidden="true" />
         </button>
+
+        {showConfirm && (
+          <div
+            ref={popoverRef}
+            className="absolute top-full right-0 mt-2 w-52 rounded-2xl p-4 z-50 animate-scale-in"
+            style={{
+              background: 'rgba(10, 12, 28, 0.97)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              boxShadow: '0 12px 40px rgba(0,0,0,0.6)',
+              transformOrigin: 'top right',
+            }}
+          >
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="w-8 h-8 rounded-xl bg-expense/15 flex items-center justify-center flex-shrink-0">
+                <LogOut size={15} className="text-expense" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="text-white text-sm font-semibold">Sign out?</p>
+                <p className="text-gray-500 text-xs font-body">You'll need to sign back in</p>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="flex-1 py-2 rounded-xl text-xs font-semibold text-gray-400 hover:text-white transition-colors cursor-pointer"
+                style={{ background: 'rgba(255,255,255,0.06)' }}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmSignOut}
+                disabled={signingOut}
+                className="flex-1 py-2 rounded-xl text-xs font-semibold text-white transition-all duration-200 cursor-pointer disabled:opacity-60"
+                style={{ background: 'rgba(248,113,113,0.2)', border: '1px solid rgba(248,113,113,0.3)' }}
+              >
+                {signingOut ? 'Signing out…' : 'Sign out'}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   )

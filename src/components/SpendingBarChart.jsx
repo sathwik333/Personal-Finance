@@ -11,8 +11,16 @@ export default function SpendingBarChart({ data }) {
         <YAxis tick={{ fill: '#94A3B8', fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={v => `$${v}`} />
         <Tooltip
           formatter={v => [`$${Number(v).toFixed(2)}`, 'Spent']}
-          contentStyle={{ backgroundColor: '#1A1D27', border: 'none', borderRadius: 8 }}
-          cursor={{ fill: 'rgba(99,102,241,0.1)' }}
+          contentStyle={{
+            backgroundColor: 'rgba(10, 12, 28, 0.97)',
+            border: '1px solid rgba(167,139,250,0.25)',
+            borderRadius: 12,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.6)',
+            padding: '8px 12px',
+          }}
+          labelStyle={{ color: '#fff', fontWeight: 600, marginBottom: 2 }}
+          itemStyle={{ color: '#A78BFA' }}
+          cursor={{ fill: 'rgba(167,139,250,0.08)' }}
         />
         <Bar dataKey="value" radius={[4, 4, 0, 0]}>
           {data.map((entry) => <Cell key={entry.name} fill={entry.color} />)}
