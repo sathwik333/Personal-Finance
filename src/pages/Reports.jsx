@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { subMonths, format, eachDayOfInterval, parseISO } from 'date-fns'
+import { subMonths, subWeeks, format, eachDayOfInterval, parseISO } from 'date-fns'
 import { useTransactions } from '../hooks/useTransactions'
 import { formatCurrency, getMonthRange, getWeekRange, groupByCategory } from '../lib/utils'
 import SpendingBarChart from '../components/SpendingBarChart'
@@ -12,7 +12,7 @@ export default function Reports() {
   const range = view === 'monthly' ? getMonthRange(now.getFullYear(), now.getMonth()) : getWeekRange(now)
   const prevRange = view === 'monthly'
     ? getMonthRange(now.getFullYear(), now.getMonth() - 1)
-    : getWeekRange(subMonths(now, 1))
+    : getWeekRange(subWeeks(now, 1))
 
   const { transactions, loading, error } = useTransactions(range)
   const { transactions: prevTxs } = useTransactions(prevRange)
