@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 import { useCategories } from '../hooks/useCategories'
 import { format } from 'date-fns'

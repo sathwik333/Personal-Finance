@@ -22,10 +22,15 @@ export function useTransactions({ from, to } = {}) {
   const { user } = useAuth()
   const [transactions, setTransactions] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   const fetchTransactions = useCallback(async () => {
-    if (!user) return
+    if (!user) {
+      setLoading(false)
+      return
+    }
     setLoading(true)
+    setError(null)
     let query = supabase
       .from('transactions')
       .select('*, categories(id, name, icon, color)')
@@ -37,13 +42,19 @@ export function useTransactions({ from, to } = {}) {
     if (to) query = query.lte('date', to)
 
     const { data, error } = await query
-    if (!error) setTransactions(data)
+    if (error) {
+      setError(error)
+      setLoading(false)
+      return
+    }
+    setTransactions(data)
     setLoading(false)
   }, [user, from, to])
 
   useEffect(() => {
+    if (!user) return
     fetchTransactions()
-  }, [fetchTransactions])
+  }, [fetchTransactions, user])
 
   async function addTransaction({ amount, type, category_id, note, date }) {
     const { data, error } = await supabase
@@ -61,6 +72,7 @@ export function useTransactions({ from, to } = {}) {
       .from('transactions')
       .update(updates)
       .eq('id', id)
+      .eq('user_id', user.id)
       .select('*, categories(id, name, icon, color)')
       .single()
     if (error) throw error
@@ -76,5 +88,5 @@ export function useTransactions({ from, to } = {}) {
 
   const summary = computeSummary(transactions)
 
-  return { transactions, loading, summary, addTransaction, updateTransaction, deleteTransaction, refetch: fetchTransactions }
+  return { transactions, loading, error, summary, addTransaction, updateTransaction, deleteTransaction, refetch: fetchTransactions }
 }
