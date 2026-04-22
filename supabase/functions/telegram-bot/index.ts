@@ -72,9 +72,9 @@ async function findCategory(userId: string, hint: string) {
     .from('categories')
     .select('id, name')
     .or(`user_id.eq.${userId},user_id.is.null`)
-  if (!data) return null
-  const lower = hint.toLowerCase()
-  return data.find(c => c.name.toLowerCase().startsWith(lower)) ?? null
+    .ilike('name', `${hint}%`)
+    .limit(1)
+  return data?.[0] ?? null
 }
 
 serve(async (req) => {
@@ -84,7 +84,12 @@ serve(async (req) => {
 
   const body = await req.json()
   const message = body.message
-  if (!message?.text) return new Response('OK')
+  if (!message?.text) {
+    if (message?.chat?.id) {
+      await sendMessage(message.chat.id, '⚠️ Please send text messages only.')
+    }
+    return new Response('OK')
+  }
 
   const chatId: number = message.chat.id
   const text: string = message.text.trim()
@@ -157,7 +162,7 @@ serve(async (req) => {
   const category = await findCategory(user.id, parsed.categoryHint)
   const today = new Date().toISOString().split('T')[0]
 
-  await supabase.from('transactions').insert({
+  const { error: insertError } = await supabase.from('transactions').insert({
     user_id: user.id,
     amount: parsed.amount,
     type: parsed.type,
@@ -166,8 +171,13 @@ serve(async (req) => {
     date: today,
   })
 
+  if (insertError) {
+    await sendMessage(chatId, '❌ Failed to log transaction. Please try again.')
+    return new Response('OK')
+  }
+
   const emoji = parsed.type === 'income' ? '💰' : '💸'
-  const catName = category?.name ?? parsed.categoryHint ?? 'Uncategorized'
+  const catName = category?.name || parsed.categoryHint || 'Uncategorized'
   await sendMessage(chatId,
     `${emoji} Logged: <b>$${parsed.amount.toFixed(2)}</b> — ${catName}${parsed.note ? ` (${parsed.note})` : ''}`
   )
