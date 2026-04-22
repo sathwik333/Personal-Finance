@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { X, ArrowDownCircle, ArrowUpCircle } from 'lucide-react'
 import { useCategories } from '../hooks/useCategories'
 import { format } from 'date-fns'
@@ -13,8 +14,14 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
-  async function handleSubmit(e) {
-    e.preventDefault()
+  // Lock body scroll while open
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = prev }
+  }, [])
+
+  async function handleSave() {
     if (!amount || Number(amount) <= 0) { setError('Enter a valid amount'); return }
     setSaving(true)
     setError('')
@@ -28,59 +35,92 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
     }
   }
 
-  const sheetStyle = {
-    background: 'rgba(13, 16, 30, 0.98)',
-    backdropFilter: 'blur(30px)',
-    WebkitBackdropFilter: 'blur(30px)',
-    border: '1px solid rgba(255,255,255,0.10)',
-    boxShadow: '0 -8px 60px rgba(0,0,0,0.6)',
-  }
-
-  return (
+  const modal = (
     <div
-      className="fixed inset-0 z-[60] flex items-end md:items-center justify-center animate-fade-in"
-      style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        background: 'rgba(0,0,0,0.75)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+      }}
       onClick={onClose}
     >
-      {/* Sheet — flex column, max 88% of screen height, always shows submit */}
+      {/* Sheet */}
       <div
-        className="w-full max-w-md rounded-t-3xl md:rounded-3xl flex flex-col animate-slide-up md:animate-scale-in"
         style={{
-          ...sheetStyle,
-          maxHeight: '88dvh',
+          width: '100%',
+          maxWidth: '448px',
+          maxHeight: '90vh',
+          display: 'flex',
+          flexDirection: 'column',
+          background: 'rgba(13, 16, 30, 0.99)',
+          backdropFilter: 'blur(30px)',
+          WebkitBackdropFilter: 'blur(30px)',
+          border: '1px solid rgba(255,255,255,0.10)',
+          borderRadius: '28px 28px 0 0',
+          boxShadow: '0 -8px 60px rgba(0,0,0,0.7)',
+          animation: 'slideUp 0.32s cubic-bezier(0.32,0.72,0,1) forwards',
         }}
         onClick={e => e.stopPropagation()}
       >
         {/* ── Pinned header ── */}
-        <div className="flex items-center justify-between px-6 pt-6 pb-4 flex-shrink-0">
-          <h2 className="text-lg font-bold text-white">{initial ? 'Edit' : 'New'} Transaction</h2>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '24px 24px 16px' }}>
+          <h2 style={{ color: '#fff', fontWeight: 700, fontSize: '18px', margin: 0 }}>
+            {initial ? 'Edit' : 'New'} Transaction
+          </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-white transition-colors p-1.5 rounded-xl hover:bg-white/5 cursor-pointer"
             aria-label="Close"
+            style={{
+              background: 'rgba(255,255,255,0.07)',
+              border: 'none',
+              borderRadius: '12px',
+              color: '#94A3B8',
+              cursor: 'pointer',
+              padding: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'background 0.15s',
+            }}
           >
             <X size={18} />
           </button>
         </div>
 
         {/* ── Scrollable body ── */}
-        <div className="overflow-y-auto flex-1 px-6 space-y-5 pb-2">
+        <div style={{ overflowY: 'auto', flex: 1, padding: '0 24px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
           {/* Type toggle */}
-          <div
-            className="flex rounded-2xl overflow-hidden p-1 gap-1"
-            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-          >
+          <div style={{ display: 'flex', gap: '8px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '18px', padding: '6px' }}>
             {[
-              { key: 'expense', label: 'Expense', Icon: ArrowDownCircle, active: 'bg-expense/20 text-expense border-expense/30' },
-              { key: 'income', label: 'Income', Icon: ArrowUpCircle, active: 'bg-income/20 text-income border-income/30' },
-            ].map(({ key, label, Icon, active }) => (
+              { key: 'expense', label: 'Expense', Icon: ArrowDownCircle, color: '#F87171', bg: 'rgba(248,113,113,0.15)', border: 'rgba(248,113,113,0.3)' },
+              { key: 'income', label: 'Income', Icon: ArrowUpCircle, color: '#34D399', bg: 'rgba(52,211,153,0.15)', border: 'rgba(52,211,153,0.3)' },
+            ].map(({ key, label, Icon, color, bg, border }) => (
               <button
                 key={key}
                 type="button"
                 onClick={() => setType(key)}
-                className={`flex-1 py-2.5 text-sm font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer border ${
-                  type === key ? active : 'text-gray-500 border-transparent hover:text-gray-300'
-                }`}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  borderRadius: '12px',
+                  border: `1px solid ${type === key ? border : 'transparent'}`,
+                  background: type === key ? bg : 'transparent',
+                  color: type === key ? color : '#64748B',
+                  fontWeight: 600,
+                  fontSize: '14px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  transition: 'all 0.2s',
+                }}
               >
                 <Icon size={15} aria-hidden="true" />
                 {label}
@@ -90,11 +130,11 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
 
           {/* Amount */}
           <div>
-            <label htmlFor="tx-amount" className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">
+            <label htmlFor="tx-amount" style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: '#64748B', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Amount
             </label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold text-lg">$</span>
+            <div style={{ position: 'relative' }}>
+              <span style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#64748B', fontWeight: 700, fontSize: '18px' }}>$</span>
               <input
                 id="tx-amount"
                 type="number"
@@ -103,7 +143,8 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
                 required
                 value={amount}
                 onChange={e => setAmount(e.target.value)}
-                className="glass-input w-full rounded-xl pl-9 pr-4 py-3.5 text-2xl font-bold"
+                className="glass-input"
+                style={{ width: '100%', borderRadius: '14px', paddingLeft: '36px', paddingRight: '16px', paddingTop: '14px', paddingBottom: '14px', fontSize: '24px', fontWeight: 700, boxSizing: 'border-box' }}
                 placeholder="0.00"
                 autoFocus
               />
@@ -112,15 +153,15 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
 
           {/* Category */}
           <div>
-            <label htmlFor="tx-category" className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">
+            <label htmlFor="tx-category" style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: '#64748B', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Category
             </label>
             <select
               id="tx-category"
               value={categoryId}
               onChange={e => setCategoryId(e.target.value)}
-              className="glass-input w-full rounded-xl px-4 py-3 text-sm cursor-pointer"
-              style={{ appearance: 'none' }}
+              className="glass-input"
+              style={{ width: '100%', borderRadius: '14px', padding: '12px 16px', fontSize: '14px', cursor: 'pointer', appearance: 'none', boxSizing: 'border-box' }}
             >
               <option value="" style={{ background: '#0D101E' }}>No category</option>
               {categories.map(cat => (
@@ -133,7 +174,7 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
 
           {/* Date */}
           <div>
-            <label htmlFor="tx-date" className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">
+            <label htmlFor="tx-date" style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: '#64748B', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
               Date
             </label>
             <input
@@ -141,46 +182,46 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="glass-input w-full rounded-xl px-4 py-3 text-sm cursor-pointer"
+              className="glass-input"
+              style={{ width: '100%', borderRadius: '14px', padding: '12px 16px', fontSize: '14px', cursor: 'pointer', boxSizing: 'border-box' }}
             />
           </div>
 
           {/* Note */}
-          <div>
-            <label htmlFor="tx-note" className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">
-              Note <span className="normal-case text-gray-600">(optional)</span>
+          <div style={{ paddingBottom: '8px' }}>
+            <label htmlFor="tx-note" style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: '#64748B', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+              Note <span style={{ textTransform: 'none', color: '#374151' }}>(optional)</span>
             </label>
             <input
               id="tx-note"
               value={note}
               onChange={e => setNote(e.target.value)}
-              className="glass-input w-full rounded-xl px-4 py-3 text-sm"
+              className="glass-input"
+              style={{ width: '100%', borderRadius: '14px', padding: '12px 16px', fontSize: '14px', boxSizing: 'border-box' }}
               placeholder="What was this for?"
               maxLength={100}
             />
           </div>
 
           {error && (
-            <p role="alert" className="text-expense text-sm font-body">{error}</p>
+            <p role="alert" style={{ color: '#F87171', fontSize: '14px', margin: 0 }}>{error}</p>
           )}
         </div>
 
-        {/* ── Pinned submit — always visible ── */}
-        <div
-          className="flex-shrink-0 px-6 py-4"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
-        >
+        {/* ── Pinned submit — always visible at bottom ── */}
+        <div style={{ padding: '16px 24px', borderTop: '1px solid rgba(255,255,255,0.07)', flexShrink: 0 }}>
           <button
             type="button"
-            onClick={handleSubmit}
+            onClick={handleSave}
             disabled={saving}
-            className="btn-primary w-full py-3.5 rounded-xl text-sm"
+            className="btn-primary"
+            style={{ width: '100%', padding: '14px', borderRadius: '14px', fontSize: '15px', border: 'none', cursor: saving ? 'not-allowed' : 'pointer' }}
           >
             {saving ? (
-              <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                <svg style={{ animation: 'spin 1s linear infinite', width: '16px', height: '16px' }} viewBox="0 0 24 24" fill="none">
+                  <circle style={{ opacity: 0.25 }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path style={{ opacity: 0.75 }} fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                 </svg>
                 Saving...
               </span>
@@ -190,4 +231,6 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
       </div>
     </div>
   )
+
+  return createPortal(modal, document.body)
 }
