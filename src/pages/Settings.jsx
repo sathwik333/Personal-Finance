@@ -14,6 +14,7 @@ export default function Settings() {
   const [telegramLinked, setTelegramLinked] = useState(false)
   const [linkCode, setLinkCode] = useState('')
   const [loadingCode, setLoadingCode] = useState(false)
+  const [codeError, setCodeError] = useState('')
   const [password, setPassword] = useState('')
   const [pwSuccess, setPwSuccess] = useState('')
   const [pwError, setPwError] = useState('')
@@ -33,9 +34,14 @@ export default function Settings() {
 
   async function generateLinkCode() {
     setLoadingCode(true)
+    setCodeError('')
     const code = generateCode()
-    await supabase.from('profiles').update({ telegram_link_code: code }).eq('id', user.id)
-    setLinkCode(code)
+    const { error } = await supabase.from('profiles').update({ telegram_link_code: code }).eq('id', user.id)
+    if (error) {
+      setCodeError('Failed to generate code. Please try again.')
+    } else {
+      setLinkCode(code)
+    }
     setLoadingCode(false)
   }
 
@@ -52,15 +58,27 @@ export default function Settings() {
   async function handleDeleteAccount() {
     if (!confirm('This will delete ALL your transactions and categories. This cannot be undone. Are you sure?')) return
     if (!confirm('Last chance — permanently delete everything?')) return
-    await supabase.from('transactions').delete().eq('user_id', user.id)
-    await supabase.from('categories').delete().eq('user_id', user.id)
-    await signOut()
-    navigate('/login')
+    try {
+      const { error: txErr } = await supabase.from('transactions').delete().eq('user_id', user.id)
+      if (txErr) throw txErr
+      const { error: catErr } = await supabase.from('categories').delete().eq('user_id', user.id)
+      if (catErr) throw catErr
+      const { error: profErr } = await supabase.from('profiles').delete().eq('id', user.id)
+      if (profErr) throw profErr
+      await signOut()
+      navigate('/login')
+    } catch (err) {
+      alert('Failed to delete account data: ' + (err.message ?? 'Unknown error'))
+    }
   }
 
   async function handleSignOut() {
-    await signOut()
-    navigate('/login')
+    try {
+      await signOut()
+      navigate('/login')
+    } catch {
+      navigate('/login')
+    }
   }
 
   return (
@@ -116,13 +134,16 @@ export default function Settings() {
                 <p className="text-xs text-gray-500 mt-1">Send this code to the bot in Telegram</p>
               </div>
             ) : (
-              <button
-                onClick={generateLinkCode}
-                disabled={loadingCode}
-                className="bg-accent hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg"
-              >
-                {loadingCode ? 'Generating...' : 'Generate Link Code'}
-              </button>
+              <>
+                {codeError && <p className="text-expense text-sm" role="alert">{codeError}</p>}
+                <button
+                  onClick={generateLinkCode}
+                  disabled={loadingCode}
+                  className="bg-accent hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg"
+                >
+                  {loadingCode ? 'Generating...' : 'Generate Link Code'}
+                </button>
+              </>
             )}
           </div>
         )}
