@@ -2,12 +2,12 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recha
 
 export default function DonutChart({ data }) {
   if (!data || data.length === 0) {
-    return <div className="flex items-center justify-center h-48 text-gray-500 text-sm">No expense data</div>
+    return <div role="status" className="flex items-center justify-center h-48 text-gray-500 text-sm">No expense data</div>
   }
 
   return (
     <ResponsiveContainer width="100%" height={240}>
-      <PieChart>
+      <PieChart role="img" aria-label="Spending by category">
         <Pie
           data={data}
           cx="50%"
@@ -17,8 +17,8 @@ export default function DonutChart({ data }) {
           paddingAngle={3}
           dataKey="value"
         >
-          {data.map((entry, i) => (
-            <Cell key={i} fill={entry.color} />
+          {data.map((entry) => (
+            <Cell key={entry.name} fill={entry.color} />
           ))}
         </Pie>
         <Tooltip

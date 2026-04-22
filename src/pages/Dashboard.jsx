@@ -8,8 +8,10 @@ import TransactionItem from '../components/TransactionItem'
 import TransactionForm from '../components/TransactionForm'
 
 export default function Dashboard() {
-  const now = new Date()
-  const { from, to } = getMonthRange(now.getFullYear(), now.getMonth())
+  const [{ from, to }] = useState(() => {
+    const now = new Date()
+    return getMonthRange(now.getFullYear(), now.getMonth())
+  })
   const { transactions, loading, error, summary, addTransaction, updateTransaction, deleteTransaction } = useTransactions({ from, to })
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
@@ -27,9 +29,14 @@ export default function Dashboard() {
   function handleEdit(tx) { setEditing(tx); setShowForm(true) }
   function handleClose() { setShowForm(false); setEditing(null) }
   async function handleSave(data) {
-    if (editing) await updateTransaction(editing.id, data)
-    else await addTransaction(data)
-    handleClose()
+    try {
+      if (editing) await updateTransaction(editing.id, data)
+      else await addTransaction(data)
+      handleClose()
+    } catch (err) {
+      console.error('Save failed:', err)
+      alert('Failed to save transaction. Please try again.')
+    }
   }
 
   const recent = transactions.slice(0, 5)
@@ -68,15 +75,15 @@ export default function Dashboard() {
         <h2 className="text-sm font-medium text-gray-400 mb-3">Recent Transactions</h2>
         {loading ? (
           <p className="text-gray-500 text-center py-4">Loading...</p>
-        ) : recent.length === 0 ? (
+        ) : !error && recent.length === 0 ? (
           <p className="text-gray-500 text-center py-4">No transactions this month</p>
-        ) : (
+        ) : !error ? (
           <div className="bg-surface rounded-xl divide-y divide-gray-800">
             {recent.map(tx => (
               <TransactionItem key={tx.id} transaction={tx} onEdit={handleEdit} onDelete={handleDelete} />
             ))}
           </div>
-        )}
+        ) : null}
       </div>
 
       {/* Floating add button */}
