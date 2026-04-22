@@ -1,9 +1,12 @@
 import { useState, useMemo } from 'react'
-import { subMonths, subWeeks, format, eachDayOfInterval, parseISO } from 'date-fns'
+import { subWeeks, format, eachDayOfInterval, parseISO } from 'date-fns'
+import { Download, TrendingDown, TrendingUp } from 'lucide-react'
 import { useTransactions } from '../hooks/useTransactions'
 import { formatCurrency, getMonthRange, getWeekRange, groupByCategory } from '../lib/utils'
 import SpendingBarChart from '../components/SpendingBarChart'
 import TrendLineChart from '../components/TrendLineChart'
+import { SkeletonChart } from '../components/Skeleton'
+import Skeleton from '../components/Skeleton'
 
 export default function Reports() {
   const [view, setView] = useState('monthly')
@@ -50,48 +53,119 @@ export default function Reports() {
     URL.revokeObjectURL(url)
   }
 
+  const periodLabel = view === 'monthly' ? 'month' : 'week'
+
   return (
-    <div className="space-y-6 py-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Reports</h1>
-        <button onClick={exportCSV} className="text-sm text-accent hover:underline" disabled={loading || transactions.length === 0}>
+    <div className="space-y-5">
+      {/* Header */}
+      <div className="flex items-center justify-between animate-fade-up">
+        <div>
+          <h1 className="text-2xl font-bold text-white tracking-tight">Reports</h1>
+          <p className="text-xs text-gray-500 font-body mt-0.5 capitalize">{view} overview</p>
+        </div>
+        <button
+          onClick={exportCSV}
+          disabled={loading || transactions.length === 0}
+          className="flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed glass-card px-3 py-2 rounded-xl cursor-pointer"
+        >
+          <Download size={13} aria-hidden="true" />
           Export CSV
         </button>
       </div>
 
-      {/* Toggle */}
-      <div className="flex bg-surface rounded-lg p-1 gap-1" role="group" aria-label="Report period">
+      {/* Period toggle */}
+      <div
+        className="glass-card rounded-2xl p-1 flex gap-1 animate-fade-up"
+        style={{ animationDelay: '50ms', animationFillMode: 'both' }}
+        role="group"
+        aria-label="Report period"
+      >
         {['weekly', 'monthly'].map(v => (
-          <button key={v} onClick={() => setView(v)}
-            className={`flex-1 py-1.5 rounded-md text-sm font-medium capitalize transition-colors ${
-              view === v ? 'bg-accent text-white' : 'text-gray-400'
-            }`}>
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            className={`flex-1 py-2.5 rounded-xl text-sm font-semibold capitalize transition-all duration-200 cursor-pointer ${
+              view === v
+                ? 'bg-accent/20 text-accent border border-accent/25'
+                : 'text-gray-500 hover:text-gray-300'
+            }`}
+          >
             {v}
           </button>
         ))}
       </div>
 
-      {error && <p className="text-expense text-sm text-center py-2">Failed to load data. Please refresh.</p>}
+      {error && (
+        <div className="glass-card rounded-2xl px-4 py-3 text-expense text-sm text-center animate-fade-up">
+          Failed to load data. Please refresh.
+        </div>
+      )}
 
-      {loading ? <p className="text-gray-400 text-center py-8">Loading...</p> : (
+      {loading ? (
+        <div className="space-y-5">
+          <div className="glass-card rounded-2xl p-4 space-y-2">
+            <Skeleton className="h-4 w-64" />
+          </div>
+          <SkeletonChart />
+          <SkeletonChart />
+        </div>
+      ) : (
         <>
-          {/* Period comparison */}
+          {/* Period comparison banner */}
           {diff !== 0 && !error && (
-            <div className={`rounded-xl p-4 text-sm ${diff > 0 ? 'bg-expense/10 text-expense' : 'bg-income/10 text-income'}`}>
-              You spent {formatCurrency(Math.abs(diff))} {diff > 0 ? 'more' : 'less'} than last {view === 'monthly' ? 'month' : 'week'}.
+            <div
+              className={`glass-card rounded-2xl px-5 py-4 flex items-center gap-3 animate-fade-up`}
+              style={{ animationDelay: '80ms', animationFillMode: 'both' }}
+            >
+              <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                diff > 0 ? 'bg-expense/15' : 'bg-income/15'
+              }`}>
+                {diff > 0
+                  ? <TrendingUp size={18} className="text-expense" />
+                  : <TrendingDown size={18} className="text-income" />
+                }
+              </div>
+              <div>
+                <p className={`text-sm font-semibold ${diff > 0 ? 'text-expense' : 'text-income'}`}>
+                  {formatCurrency(Math.abs(diff))} {diff > 0 ? 'more' : 'less'} spent
+                </p>
+                <p className="text-xs text-gray-500 font-body">
+                  compared to last {periodLabel}
+                </p>
+              </div>
             </div>
           )}
 
           {/* By category */}
-          <div className="bg-surface rounded-xl p-4">
-            <h2 className="text-sm font-medium text-gray-400 mb-4">By Category</h2>
-            <SpendingBarChart data={byCategory} />
+          <div
+            className="glass-card rounded-2xl p-5 animate-fade-up"
+            style={{ animationDelay: '100ms', animationFillMode: 'both' }}
+          >
+            <h2 className="text-sm font-semibold text-white/70 mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-4 rounded-full bg-accent inline-block" />
+              Spending by Category
+            </h2>
+            {byCategory.length === 0 ? (
+              <p className="text-gray-600 text-sm text-center py-8 font-body">No expense data for this period</p>
+            ) : (
+              <SpendingBarChart data={byCategory} />
+            )}
           </div>
 
           {/* Daily trend */}
-          <div className="bg-surface rounded-xl p-4">
-            <h2 className="text-sm font-medium text-gray-400 mb-4">Daily Spending</h2>
-            <TrendLineChart data={dailyTrend} />
+          <div
+            className="glass-card rounded-2xl p-5 animate-fade-up"
+            style={{ animationDelay: '150ms', animationFillMode: 'both' }}
+          >
+            <h2 className="text-sm font-semibold text-white/70 mb-4 flex items-center gap-2">
+              <span className="w-1.5 h-4 rounded-full bg-income inline-block" />
+              Daily Spending
+            </h2>
+            {dailyTrend.every(d => d.total === 0) ? (
+              <p className="text-gray-600 text-sm text-center py-8 font-body">No data for this period</p>
+            ) : (
+              <TrendLineChart data={dailyTrend} />
+            )}
           </div>
         </>
       )}
