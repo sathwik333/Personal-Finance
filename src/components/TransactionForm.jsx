@@ -28,25 +28,31 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
     }
   }
 
+  const sheetStyle = {
+    background: 'rgba(13, 16, 30, 0.98)',
+    backdropFilter: 'blur(30px)',
+    WebkitBackdropFilter: 'blur(30px)',
+    border: '1px solid rgba(255,255,255,0.10)',
+    boxShadow: '0 -8px 60px rgba(0,0,0,0.6)',
+  }
+
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end md:items-center justify-center animate-fade-in"
-      style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(4px)' }}
+      className="fixed inset-0 z-[60] flex items-end md:items-center justify-center animate-fade-in"
+      style={{ background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)' }}
       onClick={onClose}
     >
+      {/* Sheet — flex column, max 88% of screen height, always shows submit */}
       <div
-        className="w-full max-w-md rounded-t-3xl md:rounded-3xl p-6 space-y-5 animate-slide-up md:animate-scale-in"
+        className="w-full max-w-md rounded-t-3xl md:rounded-3xl flex flex-col animate-slide-up md:animate-scale-in"
         style={{
-          background: 'rgba(15, 18, 33, 0.95)',
-          backdropFilter: 'blur(30px)',
-          WebkitBackdropFilter: 'blur(30px)',
-          border: '1px solid rgba(255,255,255,0.10)',
-          boxShadow: '0 -8px 60px rgba(0,0,0,0.5)',
+          ...sheetStyle,
+          maxHeight: '88dvh',
         }}
         onClick={e => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between">
+        {/* ── Pinned header ── */}
+        <div className="flex items-center justify-between px-6 pt-6 pb-4 flex-shrink-0">
           <h2 className="text-lg font-bold text-white">{initial ? 'Edit' : 'New'} Transaction</h2>
           <button
             onClick={onClose}
@@ -57,30 +63,31 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
           </button>
         </div>
 
-        {/* Type toggle */}
-        <div
-          className="flex rounded-2xl overflow-hidden p-1 gap-1"
-          style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
-        >
-          {[
-            { key: 'expense', label: 'Expense', Icon: ArrowDownCircle, active: 'bg-expense/20 text-expense border-expense/30' },
-            { key: 'income', label: 'Income', Icon: ArrowUpCircle, active: 'bg-income/20 text-income border-income/30' },
-          ].map(({ key, label, Icon, active }) => (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setType(key)}
-              className={`flex-1 py-2.5 text-sm font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer border ${
-                type === key ? active : 'text-gray-500 border-transparent hover:text-gray-300'
-              }`}
-            >
-              <Icon size={15} aria-hidden="true" />
-              {label}
-            </button>
-          ))}
-        </div>
+        {/* ── Scrollable body ── */}
+        <div className="overflow-y-auto flex-1 px-6 space-y-5 pb-2">
+          {/* Type toggle */}
+          <div
+            className="flex rounded-2xl overflow-hidden p-1 gap-1"
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}
+          >
+            {[
+              { key: 'expense', label: 'Expense', Icon: ArrowDownCircle, active: 'bg-expense/20 text-expense border-expense/30' },
+              { key: 'income', label: 'Income', Icon: ArrowUpCircle, active: 'bg-income/20 text-income border-income/30' },
+            ].map(({ key, label, Icon, active }) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setType(key)}
+                className={`flex-1 py-2.5 text-sm font-semibold rounded-xl flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer border ${
+                  type === key ? active : 'text-gray-500 border-transparent hover:text-gray-300'
+                }`}
+              >
+                <Icon size={15} aria-hidden="true" />
+                {label}
+              </button>
+            ))}
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Amount */}
           <div>
             <label htmlFor="tx-amount" className="block text-xs font-semibold text-gray-400 mb-1.5 uppercase tracking-wide">
@@ -115,9 +122,9 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
               className="glass-input w-full rounded-xl px-4 py-3 text-sm cursor-pointer"
               style={{ appearance: 'none' }}
             >
-              <option value="" style={{ background: '#0F1221' }}>No category</option>
+              <option value="" style={{ background: '#0D101E' }}>No category</option>
               {categories.map(cat => (
-                <option key={cat.id} value={cat.id} style={{ background: '#0F1221' }}>
+                <option key={cat.id} value={cat.id} style={{ background: '#0D101E' }}>
                   {cat.icon} {cat.name}
                 </option>
               ))}
@@ -156,9 +163,16 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
           {error && (
             <p role="alert" className="text-expense text-sm font-body">{error}</p>
           )}
+        </div>
 
+        {/* ── Pinned submit — always visible ── */}
+        <div
+          className="flex-shrink-0 px-6 py-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+        >
           <button
-            type="submit"
+            type="button"
+            onClick={handleSubmit}
             disabled={saving}
             className="btn-primary w-full py-3.5 rounded-xl text-sm"
           >
@@ -172,7 +186,7 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
               </span>
             ) : initial ? 'Update Transaction' : 'Add Transaction'}
           </button>
-        </form>
+        </div>
       </div>
     </div>
   )
