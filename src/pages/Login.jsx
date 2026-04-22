@@ -31,13 +31,7 @@ export default function Login() {
   return (
     <div
       className="min-h-dvh flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        background: '#080B18',
-        backgroundImage: `
-          radial-gradient(ellipse 70% 60% at 10% 5%, rgba(124,58,237,0.22) 0%, transparent 60%),
-          radial-gradient(ellipse 50% 50% at 90% 95%, rgba(59,130,246,0.14) 0%, transparent 60%)
-        `,
-      }}
+      style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.15) 0%, #080B18 40%, rgba(59,130,246,0.10) 100%)' }}
     >
       {/* Floating decorative blobs */}
       <div

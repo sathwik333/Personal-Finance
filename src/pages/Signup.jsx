@@ -36,13 +36,7 @@ export default function Signup() {
   return (
     <div
       className="min-h-dvh flex items-center justify-center p-4 relative overflow-hidden"
-      style={{
-        background: '#080B18',
-        backgroundImage: `
-          radial-gradient(ellipse 70% 60% at 90% 5%, rgba(59,130,246,0.18) 0%, transparent 60%),
-          radial-gradient(ellipse 50% 50% at 10% 90%, rgba(124,58,237,0.15) 0%, transparent 60%)
-        `,
-      }}
+      style={{ background: 'linear-gradient(225deg, rgba(59,130,246,0.12) 0%, #080B18 40%, rgba(124,58,237,0.12) 100%)' }}
     >
       <div
         className="absolute top-1/3 -right-20 w-56 h-56 rounded-full opacity-15 animate-float pointer-events-none"
