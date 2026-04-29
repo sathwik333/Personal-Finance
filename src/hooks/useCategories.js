@@ -48,8 +48,23 @@ export function useCategories() {
     setCategories(prev => prev.filter(c => c.id !== id))
   }
 
+  async function updateCategory(id, { name, icon, color }) {
+    const { data, error } = await supabase
+      .from('categories')
+      .update({ name, icon, color })
+      .eq('id', id)
+      .eq('user_id', user.id)
+      .select()
+      .single()
+    if (error) throw error
+    setCategories(prev =>
+      prev.map(c => (c.id === id ? data : c)).sort((a, b) => a.name.localeCompare(b.name))
+    )
+    return data
+  }
+
   const systemCategories = categories.filter(c => c.user_id === null)
   const customCategories = categories.filter(c => c.user_id !== null)
 
-  return { categories, systemCategories, customCategories, loading, error, addCategory, deleteCategory, refetch: fetchCategories }
+  return { categories, systemCategories, customCategories, loading, error, addCategory, deleteCategory, updateCategory, refetch: fetchCategories }
 }
