@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange, calcBalance } from './utils'
+import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange, calcBalance, normalizeHex } from './utils'
 
 describe('formatCurrency', () => {
   it('formats positive number as USD', () => {
@@ -66,5 +66,26 @@ describe('calcBalance', () => {
       { amount: 30, type: 'expense' },
     ]
     expect(calcBalance(txs)).toBe(70)
+  })
+})
+
+describe('normalizeHex', () => {
+  it('accepts a valid hex with hash prefix', () => {
+    expect(normalizeHex('#6366f1')).toBe('#6366f1')
+  })
+  it('accepts a valid hex without hash prefix', () => {
+    expect(normalizeHex('6366f1')).toBe('#6366f1')
+  })
+  it('normalizes uppercase letters to lowercase', () => {
+    expect(normalizeHex('#6366F1')).toBe('#6366f1')
+  })
+  it('returns null for a 3-digit shorthand hex', () => {
+    expect(normalizeHex('#fff')).toBeNull()
+  })
+  it('returns null for non-hex characters', () => {
+    expect(normalizeHex('#gggggg')).toBeNull()
+  })
+  it('returns null for empty string', () => {
+    expect(normalizeHex('')).toBeNull()
   })
 })

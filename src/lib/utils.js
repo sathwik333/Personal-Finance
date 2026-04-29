@@ -42,3 +42,8 @@ export function calcBalance(transactions) {
     return tx.type === 'income' ? acc + Number(tx.amount) : acc - Number(tx.amount)
   }, 0)
 }
+
+export function normalizeHex(value) {
+  const cleaned = value.startsWith('#') ? value : `#${value}`
+  return /^#[0-9a-fA-F]{6}$/.test(cleaned) ? cleaned.toLowerCase() : null
+}
