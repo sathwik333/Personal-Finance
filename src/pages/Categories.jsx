@@ -16,6 +16,7 @@ export default function Categories() {
   const [hexText, setHexText] = useState('#6366f1')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const [deleteError, setDeleteError] = useState('')
 
   const [editingId, setEditingId] = useState(null)
   const [editName, setEditName] = useState('')
@@ -32,11 +33,7 @@ export default function Categories() {
     setError('')
     try {
       await addCategory({ name: name.trim(), icon, color })
-      setName('')
-      setIcon('📦')
-      setColor('#6366f1')
-      setHexText('#6366f1')
-      setShowForm(false)
+      resetAddForm()
     } catch (err) {
       setError(err.message)
     } finally {
@@ -44,12 +41,22 @@ export default function Categories() {
     }
   }
 
+  function resetAddForm() {
+    setShowForm(false)
+    setName('')
+    setIcon('📦')
+    setColor('#6366f1')
+    setHexText('#6366f1')
+    setError('')
+  }
+
   async function handleDelete(id) {
     if (!confirm('Delete this category? Transactions using it will become uncategorized.')) return
+    setDeleteError('')
     try {
       await deleteCategory(id)
     } catch (err) {
-      alert(err.message)
+      setDeleteError(err.message)
     }
   }
 
@@ -119,6 +126,8 @@ export default function Categories() {
             <div className="flex flex-wrap gap-2">
               {EMOJIS.map(e => (
                 <button key={e} type="button" onClick={() => setIcon(e)}
+                  aria-label={`Select ${e} icon`}
+                  aria-pressed={icon === e}
                   className={`text-xl p-1 rounded ${icon === e ? 'ring-2 ring-accent' : ''}`}>
                   {e}
                 </button>
@@ -151,14 +160,7 @@ export default function Categories() {
               className="bg-accent hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg">
               {saving ? 'Saving...' : 'Save'}
             </button>
-            <button type="button" onClick={() => {
-              setShowForm(false)
-              setName('')
-              setIcon('📦')
-              setColor('#6366f1')
-              setHexText('#6366f1')
-              setError('')
-            }}
+            <button type="button" onClick={resetAddForm}
               className="text-gray-400 hover:text-white text-sm px-4 py-2 rounded-lg">
               Cancel
             </button>
@@ -181,6 +183,8 @@ export default function Categories() {
           }
         </div>
       </section>
+
+      {deleteError && <p className="text-expense text-sm">{deleteError}</p>}
 
       {customCategories.length > 0 && (
         <section>
@@ -213,8 +217,9 @@ export default function Categories() {
                 {editingId === cat.id && (
                   <form onSubmit={handleEditSave} className="px-4 pb-4 space-y-4 border-t border-gray-800">
                     <div className="pt-3">
-                      <label className="block text-sm text-gray-400 mb-1">Name</label>
+                      <label htmlFor={`edit-name-${cat.id}`} className="block text-sm text-gray-400 mb-1">Name</label>
                       <input
+                        id={`edit-name-${cat.id}`}
                         value={editName}
                         onChange={e => setEditName(e.target.value)}
                         className="w-full bg-base border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent"
@@ -227,6 +232,8 @@ export default function Categories() {
                       <div className="flex flex-wrap gap-2">
                         {EMOJIS.map(e => (
                           <button key={e} type="button" onClick={() => setEditIcon(e)}
+                            aria-label={`Select ${e} icon`}
+                            aria-pressed={editIcon === e}
                             className={`text-xl p-1 rounded ${editIcon === e ? 'ring-2 ring-accent' : ''}`}>
                             {e}
                           </button>
