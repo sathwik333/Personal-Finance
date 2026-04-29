@@ -1,18 +1,29 @@
 import { useState } from 'react'
-import { Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2, Pencil } from 'lucide-react'
+import { HexColorPicker } from 'react-colorful'
 import { useCategories } from '../hooks/useCategories'
+import { normalizeHex } from '../lib/utils'
 
-const COLORS = ['#F59E0B','#3B82F6','#8B5CF6','#EC4899','#EF4444','#10B981','#F97316','#06B6D4','#6B7280','#6366F1']
 const EMOJIS = ['🍔','🚗','🛵','🛍️','🧾','🏥','🎬','📚','📦','💊','🏋️','✈️','🎮','🍺','☕','🐾','🏠','💡']
 
 export default function Categories() {
-  const { systemCategories, customCategories, loading, error: fetchError, addCategory, deleteCategory } = useCategories()
+  const { systemCategories, customCategories, loading, error: fetchError, addCategory, deleteCategory, updateCategory } = useCategories()
+
   const [showForm, setShowForm] = useState(false)
   const [name, setName] = useState('')
   const [icon, setIcon] = useState('📦')
-  const [color, setColor] = useState('#6366F1')
+  const [color, setColor] = useState('#6366f1')
+  const [hexText, setHexText] = useState('#6366f1')
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+
+  const [editingId, setEditingId] = useState(null)
+  const [editName, setEditName] = useState('')
+  const [editIcon, setEditIcon] = useState('')
+  const [editColor, setEditColor] = useState('')
+  const [editHexText, setEditHexText] = useState('')
+  const [editSaving, setEditSaving] = useState(false)
+  const [editError, setEditError] = useState('')
 
   async function handleAdd(e) {
     e.preventDefault()
@@ -23,7 +34,8 @@ export default function Categories() {
       await addCategory({ name: name.trim(), icon, color })
       setName('')
       setIcon('📦')
-      setColor('#6366F1')
+      setColor('#6366f1')
+      setHexText('#6366f1')
       setShowForm(false)
     } catch (err) {
       setError(err.message)
@@ -38,6 +50,39 @@ export default function Categories() {
       await deleteCategory(id)
     } catch (err) {
       alert(err.message)
+    }
+  }
+
+  function handleEditOpen(cat) {
+    setEditingId(cat.id)
+    setEditName(cat.name)
+    setEditIcon(cat.icon)
+    setEditColor(cat.color)
+    setEditHexText(cat.color)
+    setEditError('')
+  }
+
+  function handleEditCancel() {
+    setEditingId(null)
+    setEditName('')
+    setEditIcon('')
+    setEditColor('')
+    setEditHexText('')
+    setEditError('')
+  }
+
+  async function handleEditSave(e) {
+    e.preventDefault()
+    if (!editName.trim()) return
+    setEditSaving(true)
+    setEditError('')
+    try {
+      await updateCategory(editingId, { name: editName.trim(), icon: editIcon, color: editColor })
+      handleEditCancel()
+    } catch (err) {
+      setEditError(err.message)
+    } finally {
+      setEditSaving(false)
     }
   }
 
@@ -82,16 +127,23 @@ export default function Categories() {
           </div>
           <div>
             <label className="block text-sm text-gray-400 mb-2">Color</label>
-            <div className="flex gap-2">
-              {COLORS.map(c => (
-                <button key={c} type="button" onClick={() => setColor(c)}
-                  aria-label={`Select color ${c}`}
-                  aria-pressed={color === c}
-                  className={`w-7 h-7 rounded-full ${color === c ? 'ring-2 ring-white ring-offset-2 ring-offset-surface' : ''}`}
-                  style={{ backgroundColor: c }}
-                />
-              ))}
-            </div>
+            <HexColorPicker
+              color={color}
+              onChange={val => { setColor(val); setHexText(val) }}
+              style={{ width: '100%' }}
+            />
+            <input
+              type="text"
+              value={hexText}
+              onChange={e => {
+                setHexText(e.target.value)
+                const normalized = normalizeHex(e.target.value)
+                if (normalized) setColor(normalized)
+              }}
+              className="mt-2 w-full bg-base border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-accent"
+              placeholder="#6366f1"
+              maxLength={7}
+            />
           </div>
           {error && <p className="text-expense text-sm">{error}</p>}
           <div className="flex gap-2">
@@ -103,7 +155,8 @@ export default function Categories() {
               setShowForm(false)
               setName('')
               setIcon('📦')
-              setColor('#6366F1')
+              setColor('#6366f1')
+              setHexText('#6366f1')
               setError('')
             }}
               className="text-gray-400 hover:text-white text-sm px-4 py-2 rounded-lg">
@@ -134,13 +187,85 @@ export default function Categories() {
           <h2 className="text-sm font-medium text-gray-400 mb-3">Custom</h2>
           <div className="bg-surface rounded-xl divide-y divide-gray-800">
             {customCategories.map(cat => (
-              <div key={cat.id} className="flex items-center gap-3 px-4 py-3">
-                <span className="text-xl">{cat.icon}</span>
-                <span className="text-white flex-1">{cat.name}</span>
-                <span className="w-4 h-4 rounded-full mr-2" style={{ backgroundColor: cat.color }} />
-                <button onClick={() => handleDelete(cat.id)} className="text-gray-600 hover:text-expense transition-colors">
-                  <Trash2 size={16} />
-                </button>
+              <div key={cat.id}>
+                <div className="flex items-center gap-3 px-4 py-3">
+                  <span className="text-xl">{cat.icon}</span>
+                  <span className="text-white flex-1">{cat.name}</span>
+                  <span className="w-4 h-4 rounded-full mr-2" style={{ backgroundColor: cat.color }} />
+                  <button
+                    type="button"
+                    onClick={() => editingId === cat.id ? handleEditCancel() : handleEditOpen(cat)}
+                    className="text-gray-600 hover:text-accent transition-colors mr-2"
+                    aria-label="Edit category"
+                  >
+                    <Pencil size={16} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(cat.id)}
+                    className="text-gray-600 hover:text-expense transition-colors"
+                    aria-label="Delete category"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+
+                {editingId === cat.id && (
+                  <form onSubmit={handleEditSave} className="px-4 pb-4 space-y-4 border-t border-gray-800">
+                    <div className="pt-3">
+                      <label className="block text-sm text-gray-400 mb-1">Name</label>
+                      <input
+                        value={editName}
+                        onChange={e => setEditName(e.target.value)}
+                        className="w-full bg-base border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-accent"
+                        placeholder="Category name"
+                        maxLength={30}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">Icon</label>
+                      <div className="flex flex-wrap gap-2">
+                        {EMOJIS.map(e => (
+                          <button key={e} type="button" onClick={() => setEditIcon(e)}
+                            className={`text-xl p-1 rounded ${editIcon === e ? 'ring-2 ring-accent' : ''}`}>
+                            {e}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm text-gray-400 mb-2">Color</label>
+                      <HexColorPicker
+                        color={editColor}
+                        onChange={val => { setEditColor(val); setEditHexText(val) }}
+                        style={{ width: '100%' }}
+                      />
+                      <input
+                        type="text"
+                        value={editHexText}
+                        onChange={e => {
+                          setEditHexText(e.target.value)
+                          const normalized = normalizeHex(e.target.value)
+                          if (normalized) setEditColor(normalized)
+                        }}
+                        className="mt-2 w-full bg-base border border-gray-700 rounded-lg px-3 py-2 text-white text-sm font-mono focus:outline-none focus:border-accent"
+                        placeholder="#6366f1"
+                        maxLength={7}
+                      />
+                    </div>
+                    {editError && <p className="text-expense text-sm">{editError}</p>}
+                    <div className="flex gap-2">
+                      <button type="submit" disabled={editSaving}
+                        className="bg-accent hover:bg-indigo-500 disabled:opacity-50 text-white text-sm font-medium px-4 py-2 rounded-lg">
+                        {editSaving ? 'Saving...' : 'Save'}
+                      </button>
+                      <button type="button" onClick={handleEditCancel}
+                        className="text-gray-400 hover:text-white text-sm px-4 py-2 rounded-lg">
+                        Cancel
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             ))}
           </div>
