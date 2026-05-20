@@ -8,6 +8,8 @@ import Transactions from './pages/Transactions'
 import Reports from './pages/Reports'
 import Categories from './pages/Categories'
 import Settings from './pages/Settings'
+import Budgets from './pages/Budgets'
+import Goals from './pages/Goals'
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
@@ -37,6 +39,8 @@ export default function Router() {
           <Route path="reports" element={<Reports />} />
           <Route path="categories" element={<Categories />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="budgets" element={<Budgets />} />
+          <Route path="goals" element={<Goals />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

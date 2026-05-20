@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import { LayoutDashboard, ArrowLeftRight, BarChart2, Tag } from 'lucide-react'
+import { LayoutDashboard, ArrowLeftRight, BarChart2, PiggyBank, Target } from 'lucide-react'
 
 const links = [
   { to: '/', icon: LayoutDashboard, label: 'Home' },
   { to: '/transactions', icon: ArrowLeftRight, label: 'Transactions' },
   { to: '/reports', icon: BarChart2, label: 'Reports' },
-  { to: '/categories', icon: Tag, label: 'Categories' },
+  { to: '/budgets', icon: PiggyBank, label: 'Budgets' },
+  { to: '/goals', icon: Target, label: 'Goals' },
 ]
 
 export default function BottomNav() {
