@@ -52,8 +52,10 @@ export function getDateRange(rangeKey, now = new Date()) {
   switch (rangeKey) {
     case 'this-month':
       return getMonthRange(now.getFullYear(), now.getMonth())
-    case 'last-month':
-      return getMonthRange(now.getFullYear(), now.getMonth() - 1)
+    case 'last-month': {
+      const prev = subMonths(now, 1)
+      return { from: format(startOfMonth(prev), 'yyyy-MM-dd'), to: format(endOfMonth(prev), 'yyyy-MM-dd') }
+    }
     case 'last-3-months':
       return {
         from: format(subMonths(now, 3), 'yyyy-MM-dd'),

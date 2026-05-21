@@ -114,4 +114,11 @@ describe('getDateRange', () => {
   it('returns empty object for all-time', () => {
     expect(getDateRange('all-time', now)).toEqual({})
   })
+
+  it('returns December of prior year for last-month when now is January', () => {
+    const jan = new Date(2026, 0, 15)
+    const { from, to } = getDateRange('last-month', jan)
+    expect(from).toBe('2025-12-01')
+    expect(to).toBe('2025-12-31')
+  })
 })

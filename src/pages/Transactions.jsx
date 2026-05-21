@@ -15,6 +15,12 @@ const DATE_RANGES = [
   { key: 'all-time', label: 'All Time' },
 ]
 
+const TYPE_FILTERS = [
+  { key: 'all', label: 'All' },
+  { key: 'expense', label: 'Expenses' },
+  { key: 'income', label: 'Income' },
+]
+
 export default function Transactions() {
   const location = useLocation()
   const [filterType, setFilterType] = useState('all')
@@ -53,9 +59,14 @@ export default function Transactions() {
 
   function handleEdit(tx) { setEditing(tx); setShowForm(true) }
   async function handleSave(data) {
-    if (editing) await updateTransaction(editing.id, data)
-    else await addTransaction(data)
-    handleClose()
+    try {
+      if (editing) await updateTransaction(editing.id, data)
+      else await addTransaction(data)
+      handleClose()
+    } catch (err) {
+      console.error('Save failed:', err)
+      alert('Failed to save transaction. Please try again.')
+    }
   }
   function handleClose() { setShowForm(false); setEditing(null) }
 
@@ -63,12 +74,6 @@ export default function Transactions() {
     setSearchOpen(false)
     setSearchQuery('')
   }
-
-  const typeFilters = [
-    { key: 'all', label: 'All' },
-    { key: 'expense', label: 'Expenses' },
-    { key: 'income', label: 'Income' },
-  ]
 
   return (
     <div className="space-y-5">
@@ -84,6 +89,7 @@ export default function Transactions() {
           <button
             onClick={() => { if (searchOpen) handleCloseSearch(); else setSearchOpen(true) }}
             aria-label="Search transactions"
+            aria-pressed={searchOpen}
             className={`p-2.5 rounded-xl transition-all duration-200 cursor-pointer glass-card ${searchOpen ? 'text-accent bg-accent/10' : 'text-gray-400 hover:text-white'}`}
           >
             <Search size={16} aria-hidden="true" />
@@ -124,7 +130,7 @@ export default function Transactions() {
       >
         {/* Type filter pills + recurring pill + date range pill */}
         <div className="flex items-center gap-2 flex-wrap" role="group" aria-label="Filter by type">
-          {typeFilters.map(({ key, label }) => (
+          {TYPE_FILTERS.map(({ key, label }) => (
             <button
               key={key}
               onClick={() => setFilterType(key)}
@@ -140,6 +146,7 @@ export default function Transactions() {
 
           <button
             onClick={() => setFilterRecurring(v => !v)}
+            aria-pressed={filterRecurring}
             className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
               filterRecurring
                 ? 'bg-accent/20 text-accent border border-accent/30'
