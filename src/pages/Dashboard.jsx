@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Plus, TrendingUp, TrendingDown, Wallet } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Plus, TrendingUp, TrendingDown, Wallet, Repeat2 } from 'lucide-react'
 import { useTransactions } from '../hooks/useTransactions'
 import { formatCurrency, getMonthRange } from '../lib/utils'
 import StatCard from '../components/StatCard'
@@ -14,6 +15,7 @@ export default function Dashboard() {
     return getMonthRange(now.getFullYear(), now.getMonth())
   })
   const { transactions, loading, error, summary, addTransaction, updateTransaction, deleteTransaction } = useTransactions({ from, to })
+  const { summary: totalSummary, loading: totalLoading } = useTransactions()
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
 
@@ -38,6 +40,9 @@ export default function Dashboard() {
     }
   }
 
+  const navigate = useNavigate()
+  const recurringTxs = transactions.filter(t => t.is_recurring && t.type === 'expense')
+  const recurringTotal = recurringTxs.reduce((s, t) => s + Number(t.amount), 0)
   const recent = transactions.slice(0, 5)
   const now = new Date()
   const monthLabel = now.toLocaleString('default', { month: 'long', year: 'numeric' })
@@ -65,27 +70,35 @@ export default function Dashboard() {
           aria-hidden="true"
         />
 
-        <p className="text-xs font-medium text-white/50 uppercase tracking-widest mb-1 font-body">{monthLabel}</p>
-        <p className="text-xs text-gray-400 mb-2 font-body">Balance this month</p>
+        <p className="text-xs font-medium text-white/50 uppercase tracking-widest mb-1 font-body">Total Savings</p>
+        <p className="text-xs text-gray-400 mb-2 font-body">All-time balance</p>
 
-        {loading ? (
+        {totalLoading ? (
           <div className="flex justify-center">
             <Skeleton className="h-12 w-40 mx-auto" rounded="rounded-xl" />
           </div>
         ) : (
-          <p className={`text-5xl font-bold tracking-tight ${summary.balance >= 0 ? 'text-income' : 'text-expense'}`}>
-            {summary.balance < 0 ? '-' : ''}{formatCurrency(Math.abs(summary.balance))}
+          <p className={`text-5xl font-bold tracking-tight ${totalSummary.balance >= 0 ? 'text-income' : 'text-expense'}`}>
+            {totalSummary.balance < 0 ? '-' : ''}{formatCurrency(Math.abs(totalSummary.balance))}
           </p>
         )}
 
-        {!loading && summary.balance < 0 && (
-          <p className="text-expense/80 text-xs mt-2 font-body">spending exceeds income</p>
-        )}
-        {!loading && summary.balance >= 0 && summary.totalIncome > 0 && (
-          <p className="text-income/70 text-xs mt-2 font-body">
-            saving {((summary.balance / summary.totalIncome) * 100).toFixed(0)}% of income
-          </p>
-        )}
+        {/* This month's balance */}
+        <div className="mt-3 pt-3 border-t border-white/10">
+          <p className="text-xs text-white/40 uppercase tracking-widest mb-1 font-body">{monthLabel}</p>
+          {loading ? (
+            <Skeleton className="h-5 w-24 mx-auto" rounded="rounded-lg" />
+          ) : (
+            <p className={`text-base font-semibold ${summary.balance >= 0 ? 'text-income/80' : 'text-expense/80'}`}>
+              {summary.balance >= 0 ? '+' : ''}{formatCurrency(summary.balance)} this month
+            </p>
+          )}
+          {!loading && summary.balance >= 0 && summary.totalIncome > 0 && (
+            <p className="text-income/50 text-xs mt-0.5 font-body">
+              saving {((summary.balance / summary.totalIncome) * 100).toFixed(0)}% of income
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Stat cards */}
@@ -106,6 +119,24 @@ export default function Dashboard() {
         <div className="glass-card rounded-2xl px-4 py-3 text-expense text-sm text-center">
           Failed to load data. Please refresh.
         </div>
+      )}
+
+      {/* Recurring summary card */}
+      {!loading && recurringTxs.length > 0 && (
+        <button
+          onClick={() => navigate('/transactions', { state: { filterRecurring: true } })}
+          className="glass-card rounded-2xl px-5 py-4 flex items-center gap-4 w-full text-left animate-fade-up cursor-pointer hover:bg-white/[0.03] transition-colors"
+          style={{ animationDelay: '130ms', animationFillMode: 'both' }}
+        >
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(167,139,250,0.12)', border: '1px solid rgba(167,139,250,0.2)' }}>
+            <Repeat2 size={18} className="text-accent" aria-hidden="true" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-white">Monthly Recurring</p>
+            <p className="text-xs text-gray-500 font-body mt-0.5">{recurringTxs.length} subscription{recurringTxs.length !== 1 ? 's' : ''} this month</p>
+          </div>
+          <p className="text-expense font-bold text-sm tabular-nums flex-shrink-0">{formatCurrency(recurringTotal)}</p>
+        </button>
       )}
 
       {/* Donut chart */}
