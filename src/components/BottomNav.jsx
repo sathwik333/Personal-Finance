@@ -12,7 +12,7 @@ const links = [
 export default function BottomNav() {
   return (
     <nav
-      aria-label="Main navigation"
+      aria-label="Tab bar"
       className="fixed bottom-0 left-0 right-0 flex md:hidden z-40 px-4 pb-safe-area-inset-bottom"
       style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 8px)' }}
     >
