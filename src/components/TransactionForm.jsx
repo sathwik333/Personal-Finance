@@ -206,17 +206,17 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
 
           {/* Recurring toggle */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px' }}>
-            <div>
-              <label htmlFor="tx-recurring" style={{ color: '#94A3B8', fontSize: '14px', fontWeight: 500, cursor: 'pointer' }}>
-                🔁 Recurring transaction
+            <div onClick={() => setIsRecurring(v => !v)} style={{ cursor: 'pointer' }}>
+              <label style={{ color: '#94A3B8', fontSize: '14px', fontWeight: 500, cursor: 'pointer', userSelect: 'none' }}>
+                <span aria-hidden="true">🔁</span> Recurring transaction
               </label>
               <p style={{ color: '#475569', fontSize: '11px', marginTop: '2px' }}>e.g. rent, subscriptions</p>
             </div>
             <button
-              id="tx-recurring"
               type="button"
               role="switch"
-              aria-checked={isRecurring}
+              aria-checked={isRecurring ? 'true' : 'false'}
+              aria-label="Recurring transaction"
               onClick={() => setIsRecurring(v => !v)}
               style={{
                 width: '44px',
