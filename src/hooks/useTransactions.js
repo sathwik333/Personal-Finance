@@ -56,10 +56,10 @@ export function useTransactions({ from, to } = {}) {
     fetchTransactions()
   }, [fetchTransactions, user])
 
-  async function addTransaction({ amount, type, category_id, note, date }) {
+  async function addTransaction({ amount, type, category_id, note, date, is_recurring = false }) {
     const { data, error } = await supabase
       .from('transactions')
-      .insert({ user_id: user.id, amount: Number(amount), type, category_id: category_id || null, note: note || null, date })
+      .insert({ user_id: user.id, amount: Number(amount), type, category_id: category_id || null, note: note || null, date, is_recurring })
       .select('*, categories(id, name, icon, color)')
       .single()
     if (error) throw error

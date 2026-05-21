@@ -1,9 +1,9 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Trash2, Repeat2 } from 'lucide-react'
 import { formatCurrency, formatDate } from '../lib/utils'
 import CategoryBadge from './CategoryBadge'
 
 export default function TransactionItem({ transaction, onEdit, onDelete, animDelay = 0 }) {
-  const { amount, type, note, date, categories } = transaction
+  const { amount, type, note, date, categories, is_recurring } = transaction
   const isIncome = type === 'income'
 
   return (
@@ -26,6 +26,11 @@ export default function TransactionItem({ transaction, onEdit, onDelete, animDel
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <CategoryBadge category={categories} />
+          {is_recurring && (
+            <span title="Recurring" aria-label="Recurring transaction">
+              <Repeat2 size={11} className="text-accent/60" />
+            </span>
+          )}
         </div>
         {note && (
           <p className="text-xs text-gray-500 truncate mt-0.5 font-body">{note}</p>

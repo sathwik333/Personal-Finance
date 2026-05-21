@@ -11,6 +11,7 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
   const [categoryId, setCategoryId] = useState(initial?.category_id ?? '')
   const [note, setNote] = useState(initial?.note ?? '')
   const [date, setDate] = useState(initial?.date ?? format(new Date(), 'yyyy-MM-dd'))
+  const [isRecurring, setIsRecurring] = useState(initial?.is_recurring ?? false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
 
@@ -26,7 +27,7 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
     setSaving(true)
     setError('')
     try {
-      await onSave({ amount: Number(amount), type, category_id: categoryId || null, note, date })
+      await onSave({ amount: Number(amount), type, category_id: categoryId || null, note, date, is_recurring: isRecurring })
       onClose()
     } catch (err) {
       setError(err.message)
@@ -201,6 +202,45 @@ export default function TransactionForm({ onSave, onClose, initial = null }) {
               placeholder="What was this for?"
               maxLength={100}
             />
+          </div>
+
+          {/* Recurring toggle */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '8px' }}>
+            <div>
+              <label htmlFor="tx-recurring" style={{ color: '#94A3B8', fontSize: '14px', fontWeight: 500, cursor: 'pointer' }}>
+                🔁 Recurring transaction
+              </label>
+              <p style={{ color: '#475569', fontSize: '11px', marginTop: '2px' }}>e.g. rent, subscriptions</p>
+            </div>
+            <button
+              id="tx-recurring"
+              type="button"
+              role="switch"
+              aria-checked={isRecurring}
+              onClick={() => setIsRecurring(v => !v)}
+              style={{
+                width: '44px',
+                height: '24px',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                background: isRecurring ? 'rgba(167,139,250,0.8)' : 'rgba(255,255,255,0.12)',
+                position: 'relative',
+                flexShrink: 0,
+              }}
+            >
+              <span style={{
+                position: 'absolute',
+                top: '3px',
+                left: isRecurring ? '23px' : '3px',
+                width: '18px',
+                height: '18px',
+                borderRadius: '50%',
+                background: '#fff',
+                transition: 'left 0.2s',
+              }} />
+            </button>
           </div>
 
           {error && (
