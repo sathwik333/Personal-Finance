@@ -13,8 +13,9 @@ function statusColor(status) {
 }
 
 function statusLabel(status, spent, limit) {
-  if (status === 'over') return `$${(spent - limit).toFixed(0)} over`
-  return `$${(limit - spent).toFixed(0)} left`
+  if (status === 'over') return `${formatCurrency(spent - limit)} over`
+  if (status === 'warning') return `${formatCurrency(limit - spent)} left — almost over`
+  return `${formatCurrency(limit - spent)} left`
 }
 
 export default function Budgets() {
@@ -120,18 +121,18 @@ export default function Budgets() {
                 ) : (
                   <div key={b.id} className="rounded-2xl p-4 space-y-2 group" style={{ background: colors.bg, border: `1px solid ${colors.border}` }}>
                     <div className="flex items-start justify-between">
-                      <p className="text-xs font-semibold text-white truncate">{b.categories?.icon} {b.categories?.name}</p>
-                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <p className="text-xs font-semibold text-white truncate">{b.categories?.icon ?? ''} {b.categories?.name ?? 'Unknown'}</p>
+                      <div className="flex gap-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                         <button
                           onClick={() => { setEditingId(b.id); setEditValue(b.monthly_limit) }}
-                          aria-label={`Edit ${b.categories?.name} budget`}
+                          aria-label={`Edit ${b.categories?.name ?? 'budget'}`}
                           className="cursor-pointer text-gray-500 hover:text-white"
                         >
                           <Pencil size={11} aria-hidden="true" />
                         </button>
                         <button
                           onClick={() => handleDelete(b.id)}
-                          aria-label={`Delete ${b.categories?.name} budget`}
+                          aria-label={`Delete ${b.categories?.name ?? 'budget'}`}
                           className="cursor-pointer text-gray-500 hover:text-expense"
                         >
                           <Trash2 size={11} aria-hidden="true" />
@@ -146,12 +147,12 @@ export default function Budgets() {
                       <div className="rounded-full h-1.5" style={{ background: 'rgba(255,255,255,0.08)' }}>
                         <div
                           className="rounded-full h-1.5 transition-all duration-500"
-                          style={{ width: `${b.pct * 100}%`, background: colors.text }}
+                          style={{ width: `${Math.min(b.pct * 100, 100)}%`, background: colors.text }}
                           role="progressbar"
-                          aria-valuenow={Math.round(b.pct * 100)}
+                          aria-valuenow={Math.min(Math.round(b.pct * 100), 100)}
                           aria-valuemin={0}
                           aria-valuemax={100}
-                          aria-label={`${b.categories?.name} budget ${Math.round(b.pct * 100)}% used`}
+                          aria-label={`${b.categories?.name ?? 'Budget'} ${Math.min(Math.round(b.pct * 100), 100)}% used`}
                         />
                       </div>
                     </div>
@@ -186,6 +187,7 @@ export default function Budgets() {
                   onChange={e => setAddCategoryId(e.target.value)}
                   className="glass-input w-full rounded-xl px-4 py-3 text-sm cursor-pointer"
                   style={{ appearance: 'none' }}
+                  autoFocus
                 >
                   <option value="" style={{ background: '#0F1221' }}>Choose a category…</option>
                   {categoriesWithoutBudget.map(c => (
@@ -204,7 +206,6 @@ export default function Budgets() {
                   onChange={e => setAddLimit(e.target.value)}
                   className="glass-input w-full rounded-xl px-4 py-3 text-sm"
                   placeholder="e.g. 500"
-                  autoFocus
                 />
               </div>
               <div className="flex gap-3">
