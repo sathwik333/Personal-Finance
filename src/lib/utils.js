@@ -1,4 +1,4 @@
-import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns'
+import { format, startOfMonth, endOfMonth, startOfWeek, endOfWeek, subMonths } from 'date-fns'
 
 export function formatCurrency(amount) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
@@ -46,4 +46,20 @@ export function calcBalance(transactions) {
 export function normalizeHex(value) {
   const cleaned = value.startsWith('#') ? value : `#${value}`
   return /^#[0-9a-fA-F]{6}$/.test(cleaned) ? cleaned.toLowerCase() : null
+}
+
+export function getDateRange(rangeKey, now = new Date()) {
+  switch (rangeKey) {
+    case 'this-month':
+      return getMonthRange(now.getFullYear(), now.getMonth())
+    case 'last-month':
+      return getMonthRange(now.getFullYear(), now.getMonth() - 1)
+    case 'last-3-months':
+      return {
+        from: format(subMonths(now, 3), 'yyyy-MM-dd'),
+        to: format(now, 'yyyy-MM-dd'),
+      }
+    default:
+      return {}
+  }
 }

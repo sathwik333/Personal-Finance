@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange, calcBalance, normalizeHex } from './utils'
+import { formatCurrency, formatDate, groupByCategory, getMonthRange, getWeekRange, calcBalance, normalizeHex, getDateRange } from './utils'
 
 describe('formatCurrency', () => {
   it('formats positive number as USD', () => {
@@ -87,5 +87,31 @@ describe('normalizeHex', () => {
   })
   it('returns null for empty string', () => {
     expect(normalizeHex('')).toBeNull()
+  })
+})
+
+describe('getDateRange', () => {
+  const now = new Date(2026, 4, 20) // May 20 2026
+
+  it('returns current month range for this-month', () => {
+    const { from, to } = getDateRange('this-month', now)
+    expect(from).toBe('2026-05-01')
+    expect(to).toBe('2026-05-31')
+  })
+
+  it('returns previous month range for last-month', () => {
+    const { from, to } = getDateRange('last-month', now)
+    expect(from).toBe('2026-04-01')
+    expect(to).toBe('2026-04-30')
+  })
+
+  it('returns 3-month range for last-3-months', () => {
+    const { from, to } = getDateRange('last-3-months', now)
+    expect(from).toBe('2026-02-20')
+    expect(to).toBe('2026-05-20')
+  })
+
+  it('returns empty object for all-time', () => {
+    expect(getDateRange('all-time', now)).toEqual({})
   })
 })

@@ -1,22 +1,45 @@
-import { useState } from 'react'
-import { Plus, Search, SlidersHorizontal } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+import { Plus, Search, SlidersHorizontal, X, Repeat2 } from 'lucide-react'
 import { useTransactions } from '../hooks/useTransactions'
 import { useCategories } from '../hooks/useCategories'
+import { getDateRange } from '../lib/utils'
 import TransactionForm from '../components/TransactionForm'
 import TransactionItem from '../components/TransactionItem'
 import { SkeletonTransactions } from '../components/Skeleton'
 
+const DATE_RANGES = [
+  { key: 'this-month', label: 'This Month' },
+  { key: 'last-month', label: 'Last Month' },
+  { key: 'last-3-months', label: '3 Months' },
+  { key: 'all-time', label: 'All Time' },
+]
+
 export default function Transactions() {
+  const location = useLocation()
   const [filterType, setFilterType] = useState('all')
   const [filterCategory, setFilterCategory] = useState('')
-  const { transactions, loading, error, addTransaction, updateTransaction, deleteTransaction } = useTransactions()
+  const [filterRecurring, setFilterRecurring] = useState(location.state?.filterRecurring ?? false)
+  const [dateRange, setDateRange] = useState('this-month')
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchRef = useRef(null)
+
+  const range = getDateRange(dateRange)
+  const { transactions, loading, error, addTransaction, updateTransaction, deleteTransaction } = useTransactions(range)
   const { categories } = useCategories()
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
 
+  useEffect(() => {
+    if (searchOpen && searchRef.current) searchRef.current.focus()
+  }, [searchOpen])
+
   const filtered = transactions.filter(t => {
     if (filterType !== 'all' && t.type !== filterType) return false
     if (filterCategory && t.category_id !== filterCategory) return false
+    if (filterRecurring && !t.is_recurring) return false
+    if (searchQuery && !t.note?.toLowerCase().includes(searchQuery.toLowerCase())) return false
     return true
   })
 
@@ -36,6 +59,11 @@ export default function Transactions() {
   }
   function handleClose() { setShowForm(false); setEditing(null) }
 
+  function handleCloseSearch() {
+    setSearchOpen(false)
+    setSearchQuery('')
+  }
+
   const typeFilters = [
     { key: 'all', label: 'All' },
     { key: 'expense', label: 'Expenses' },
@@ -52,21 +80,50 @@ export default function Transactions() {
             {!loading && `${filtered.length} ${filtered.length === 1 ? 'record' : 'records'}`}
           </p>
         </div>
-        <button
-          onClick={() => { setEditing(null); setShowForm(true) }}
-          className="btn-primary flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm"
-        >
-          <Plus size={16} aria-hidden="true" /> Add
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { if (searchOpen) handleCloseSearch(); else setSearchOpen(true) }}
+            aria-label="Search transactions"
+            className={`p-2.5 rounded-xl transition-all duration-200 cursor-pointer glass-card ${searchOpen ? 'text-accent bg-accent/10' : 'text-gray-400 hover:text-white'}`}
+          >
+            <Search size={16} aria-hidden="true" />
+          </button>
+          <button
+            onClick={() => { setEditing(null); setShowForm(true) }}
+            className="btn-primary flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm"
+          >
+            <Plus size={16} aria-hidden="true" /> Add
+          </button>
+        </div>
       </div>
+
+      {/* Inline search bar */}
+      {searchOpen && (
+        <div className="glass-card rounded-2xl px-4 py-3 flex items-center gap-3 animate-fade-up">
+          <Search size={15} className="text-accent flex-shrink-0" aria-hidden="true" />
+          <input
+            ref={searchRef}
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            placeholder="Search by note..."
+            className="flex-1 bg-transparent text-sm text-white placeholder-gray-600 outline-none"
+            aria-label="Search transactions by note"
+          />
+          {searchQuery && (
+            <button onClick={() => setSearchQuery('')} aria-label="Clear search" className="text-gray-500 hover:text-white cursor-pointer">
+              <X size={15} />
+            </button>
+          )}
+        </div>
+      )}
 
       {/* Filters */}
       <div
         className="glass-card rounded-2xl p-3 space-y-3 animate-fade-up"
         style={{ animationDelay: '60ms', animationFillMode: 'both' }}
       >
-        {/* Type filter pills */}
-        <div className="flex gap-2" role="group" aria-label="Filter by type">
+        {/* Type filter pills + recurring pill + date range pill */}
+        <div className="flex items-center gap-2 flex-wrap" role="group" aria-label="Filter by type">
           {typeFilters.map(({ key, label }) => (
             <button
               key={key}
@@ -80,6 +137,33 @@ export default function Transactions() {
               {label}
             </button>
           ))}
+
+          <button
+            onClick={() => setFilterRecurring(v => !v)}
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${
+              filterRecurring
+                ? 'bg-accent/20 text-accent border border-accent/30'
+                : 'text-gray-500 border border-transparent hover:text-gray-300 hover:bg-white/5'
+            }`}
+          >
+            <Repeat2 size={11} aria-hidden="true" /> Recurring
+          </button>
+
+          {/* Date range pill — pushed to the right */}
+          <div className="ml-auto relative">
+            <select
+              value={dateRange}
+              onChange={e => setDateRange(e.target.value)}
+              aria-label="Date range"
+              className="glass-input rounded-xl px-3 py-1.5 text-xs font-semibold text-gray-300 cursor-pointer pr-7"
+              style={{ appearance: 'none', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
+            >
+              {DATE_RANGES.map(r => (
+                <option key={r.key} value={r.key} style={{ background: '#0F1221' }}>{r.label}</option>
+              ))}
+            </select>
+            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none text-xs">▾</span>
+          </div>
         </div>
 
         {/* Category filter */}
