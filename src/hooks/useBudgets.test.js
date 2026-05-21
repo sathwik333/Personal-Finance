@@ -44,4 +44,14 @@ describe('computeBudgetStats', () => {
     const { budgetsWithStats } = computeBudgetStats(budgets, spending)
     expect(budgetsWithStats.find(b => b.category_id === 'cat-b').pct).toBe(1)
   })
+
+  it('marks 85% spent budget as warning', () => {
+    const { budgetsWithStats } = computeBudgetStats(budgets, { 'cat-a': 425 })
+    expect(budgetsWithStats.find(b => b.category_id === 'cat-a').status).toBe('warning')
+  })
+
+  it('marks exactly 80% spent budget as warning (boundary)', () => {
+    const { budgetsWithStats } = computeBudgetStats(budgets, { 'cat-a': 400 })
+    expect(budgetsWithStats.find(b => b.category_id === 'cat-a').status).toBe('warning')
+  })
 })

@@ -45,22 +45,22 @@ export function useBudgets() {
     if (budgetErr || txErr) { setError(budgetErr || txErr); setLoading(false); return }
 
     const spendMap = {}
-    for (const tx of txData) {
+    for (const tx of txData ?? []) {
       if (!tx.category_id) continue
       spendMap[tx.category_id] = (spendMap[tx.category_id] || 0) + Number(tx.amount)
     }
 
-    setBudgets(budgetData)
+    setBudgets(budgetData ?? [])
     setSpending(spendMap)
     setLoading(false)
   }, [user])
 
   useEffect(() => {
-    if (!user) return
+    if (!user) { setBudgets([]); setSpending({}); return }
     fetchBudgets()
-  }, [fetchBudgets, user])
+  }, [fetchBudgets])
 
-  async function addBudget({ category_id, monthly_limit }) {
+  const addBudget = useCallback(async ({ category_id, monthly_limit }) => {
     const { data, error } = await supabase
       .from('budgets')
       .upsert(
@@ -76,9 +76,9 @@ export function useBudgets() {
       return [...prev, data]
     })
     return data
-  }
+  }, [user])
 
-  async function updateBudget(id, monthly_limit) {
+  const updateBudget = useCallback(async (id, monthly_limit) => {
     const { data, error } = await supabase
       .from('budgets')
       .update({ monthly_limit: Number(monthly_limit) })
@@ -89,13 +89,13 @@ export function useBudgets() {
     if (error) throw error
     setBudgets(prev => prev.map(b => b.id === id ? data : b))
     return data
-  }
+  }, [user])
 
-  async function deleteBudget(id) {
+  const deleteBudget = useCallback(async (id) => {
     const { error } = await supabase.from('budgets').delete().eq('id', id).eq('user_id', user.id)
     if (error) throw error
     setBudgets(prev => prev.filter(b => b.id !== id))
-  }
+  }, [user])
 
   return { budgets, spending, loading, error, addBudget, updateBudget, deleteBudget, refetch: fetchBudgets }
 }
