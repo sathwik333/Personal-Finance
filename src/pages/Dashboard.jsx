@@ -18,6 +18,7 @@ export default function Dashboard() {
   const { summary: totalSummary, loading: totalLoading } = useTransactions()
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
+  const navigate = useNavigate()
 
   async function handleDelete(id) {
     if (!confirm('Delete this transaction?')) return
@@ -40,7 +41,6 @@ export default function Dashboard() {
     }
   }
 
-  const navigate = useNavigate()
   const recurringTxs = transactions.filter(t => t.is_recurring && t.type === 'expense')
   const recurringTotal = recurringTxs.reduce((s, t) => s + Number(t.amount), 0)
   const recent = transactions.slice(0, 5)
@@ -133,7 +133,7 @@ export default function Dashboard() {
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-white">Monthly Recurring</p>
-            <p className="text-xs text-gray-500 font-body mt-0.5">{recurringTxs.length} subscription{recurringTxs.length !== 1 ? 's' : ''} this month</p>
+            <p className="text-xs text-gray-500 font-body mt-0.5">{recurringTxs.length} recurring expense{recurringTxs.length !== 1 ? 's' : ''} this month</p>
           </div>
           <p className="text-expense font-bold text-sm tabular-nums flex-shrink-0">{formatCurrency(recurringTotal)}</p>
         </button>
