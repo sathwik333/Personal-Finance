@@ -47,12 +47,12 @@ export default function TopNav() {
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}
     >
-      <div className="flex items-center gap-2 md:mr-8">
+      <NavLink to="/" className="flex items-center gap-2 md:mr-8 cursor-pointer">
         <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center shadow-lg shadow-violet-900/50">
           <TrendingUp size={14} className="text-white" aria-hidden="true" />
         </div>
         <span className="hidden md:block text-white font-bold tracking-tight">Finely</span>
-      </div>
+      </NavLink>
 
       {links.map(({ to, label }) => (
         <NavLink
