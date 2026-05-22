@@ -66,6 +66,7 @@ export default function Goals() {
                 <button
                   key={g.id}
                   onClick={() => setSelectedGoalId(g.id)}
+                  aria-label={`${g.emoji} ${g.name}, ${formatCurrency(Number(g.current_amount))} of ${formatCurrency(Number(g.target_amount))}${g.complete ? ', complete' : ''}`}
                   className="glass-card rounded-2xl p-4 flex flex-col items-center gap-2 text-center cursor-pointer hover:bg-white/[0.04] transition-colors"
                   style={g.complete ? { border: '1px solid rgba(52,211,153,0.3)' } : {}}
                 >

@@ -54,7 +54,7 @@ export default function GoalSheet({ goal, deposits, onClose, onAddDeposit, onDel
             <div>
               <h2 style={{ color: '#fff', fontWeight: 700, fontSize: '18px', margin: 0 }}>{goal.emoji} {goal.name}</h2>
               <p style={{ color: '#64748B', fontSize: '13px', margin: '2px 0 0' }}>
-                {formatCurrency(goal.current_amount)} of {formatCurrency(Number(goal.target_amount))}
+                {formatCurrency(Number(goal.current_amount))} of {formatCurrency(Number(goal.target_amount))}
                 {goal.deadline ? ` · due ${formatDate(goal.deadline)}` : ''}
               </p>
             </div>
