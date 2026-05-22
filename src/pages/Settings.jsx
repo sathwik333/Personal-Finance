@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { LogOut, Shield, MessageCircle, KeyRound, AlertTriangle, CheckCircle } from 'lucide-react'
+import { LogOut, Shield, MessageCircle, KeyRound, AlertTriangle, CheckCircle, Tag, ChevronRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { supabase } from '../lib/supabase'
 
 function generateCode() {
-  return Math.random().toString(36).substring(2, 10).toUpperCase()
+  const bytes = new Uint8Array(6)
+  crypto.getRandomValues(bytes)
+  return Array.from(bytes, b => b.toString(36).padStart(2, '0')).join('').substring(0, 8).toUpperCase()
 }
 
 export default function Settings() {
@@ -38,8 +40,12 @@ export default function Settings() {
     setLoadingCode(true)
     setCodeError('')
     const code = generateCode()
-    const { error } = await supabase.from('profiles').update({ telegram_link_code: code }).eq('id', user.id)
-    if (error) setCodeError('Failed to generate code. Please try again.')
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ telegram_link_code: code })
+      .eq('id', user.id)
+      .select('id')
+    if (error || !data?.length) setCodeError('Failed to generate code. Please try again.')
     else setLinkCode(code)
     setLoadingCode(false)
   }
@@ -48,7 +54,7 @@ export default function Settings() {
     e.preventDefault()
     setPwError('')
     setPwSuccess('')
-    if (password.length < 6) { setPwError('Password must be at least 6 characters'); return }
+    if (password.length < 8) { setPwError('Password must be at least 8 characters'); return }
     const { error } = await supabase.auth.updateUser({ password })
     if (error) setPwError(error.message)
     else { setPwSuccess('Password updated successfully'); setPassword('') }
@@ -104,7 +110,7 @@ export default function Settings() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               className="glass-input w-full rounded-xl px-4 py-3 text-sm"
-              placeholder="Min. 6 characters"
+              placeholder="Min. 8 characters"
               autoComplete="new-password"
             />
           </div>
@@ -119,6 +125,21 @@ export default function Settings() {
           </button>
         </form>
       </section>
+
+      {/* Manage Categories */}
+      <button
+        onClick={() => navigate('/categories')}
+        className="glass-card rounded-2xl p-5 flex items-center gap-3 w-full text-left cursor-pointer hover:bg-white/[0.03] transition-colors"
+      >
+        <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(167,139,250,0.12)' }}>
+          <Tag size={15} className="text-accent" aria-hidden="true" />
+        </div>
+        <div className="flex-1">
+          <h2 className="text-sm font-semibold text-white">Manage Categories</h2>
+          <p className="text-xs text-gray-500 font-body mt-0.5">Add, edit, or remove your custom categories</p>
+        </div>
+        <ChevronRight size={16} className="text-gray-600 flex-shrink-0" aria-hidden="true" />
+      </button>
 
       {/* Telegram */}
       <section className="glass-card rounded-2xl p-5 space-y-3">
@@ -149,7 +170,7 @@ export default function Settings() {
 
             {linkCode ? (
               <div className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                <p className="text-xs text-gray-500 mb-1.5 font-body">Your link code (expires in 10 min)</p>
+                <p className="text-xs text-gray-500 mb-1.5 font-body">Your link code — send it to the bot once</p>
                 <p className="text-accent text-3xl font-mono font-bold tracking-widest">{linkCode}</p>
                 <p className="text-xs text-gray-600 mt-1.5 font-body">Send this to the bot in Telegram</p>
               </div>
