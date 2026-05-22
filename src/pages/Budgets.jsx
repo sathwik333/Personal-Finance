@@ -27,6 +27,7 @@ export default function Budgets() {
   const [addCategoryId, setAddCategoryId] = useState('')
   const [addLimit, setAddLimit] = useState('')
   const [saving, setSaving] = useState(false)
+  const [addError, setAddError] = useState('')
 
   const { totalLimit, totalSpent, budgetsWithStats } = computeBudgetStats(budgets, spending)
   const remaining = totalLimit - totalSpent
@@ -51,12 +52,15 @@ export default function Budgets() {
   async function handleAddBudget() {
     if (!addCategoryId || !addLimit || Number(addLimit) <= 0) return
     setSaving(true)
+    setAddError('')
     try {
       await addBudget({ category_id: addCategoryId, monthly_limit: addLimit })
       setShowAddForm(false)
       setAddCategoryId('')
       setAddLimit('')
-    } catch (err) { console.error(err) } finally { setSaving(false) }
+    } catch (err) {
+      setAddError(err.message ?? 'Failed to save budget. Please try again.')
+    } finally { setSaving(false) }
   }
 
   async function handleDelete(id) {
@@ -208,6 +212,7 @@ export default function Budgets() {
                   placeholder="e.g. 500"
                 />
               </div>
+              {addError && <p role="alert" className="text-expense text-sm font-body">{addError}</p>}
               <div className="flex gap-3">
                 <button
                   onClick={handleAddBudget}
@@ -217,7 +222,7 @@ export default function Budgets() {
                   {saving ? 'Saving…' : 'Set Budget'}
                 </button>
                 <button
-                  onClick={() => { setShowAddForm(false); setAddCategoryId(''); setAddLimit('') }}
+                  onClick={() => { setShowAddForm(false); setAddCategoryId(''); setAddLimit(''); setAddError('') }}
                   className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-gray-400 hover:text-white transition-colors cursor-pointer glass-card"
                 >
                   Cancel

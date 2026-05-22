@@ -63,18 +63,12 @@ export function useBudgets() {
   const addBudget = useCallback(async ({ category_id, monthly_limit }) => {
     const { data, error } = await supabase
       .from('budgets')
-      .upsert(
-        { user_id: user.id, category_id, monthly_limit: Number(monthly_limit) },
-        { onConflict: 'user_id,category_id' }
-      )
+      .insert({ user_id: user.id, category_id, monthly_limit: Number(monthly_limit) })
       .select('*, categories(id, name, icon, color)')
       .single()
     if (error) throw error
-    setBudgets(prev => {
-      const idx = prev.findIndex(b => b.category_id === category_id)
-      if (idx >= 0) { const next = [...prev]; next[idx] = data; return next }
-      return [...prev, data]
-    })
+    if (!data) throw new Error('Budget was not saved. Please try again.')
+    setBudgets(prev => [...prev, data])
     return data
   }, [user])
 
