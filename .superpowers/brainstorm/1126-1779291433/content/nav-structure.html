@@ -1,0 +1,33 @@
+<h2>Where should the new features live?</h2>
+<p class="subtitle">We're adding: Budgets, Savings Goals, Search, Recurring markers, Date range filter. The current nav has 5 tabs — we need to decide how to absorb the new features.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Add 2 new tabs: Budgets + Goals</h3>
+      <p>Nav becomes: Dashboard · Transactions · Reports · Budgets · Goals<br>
+      Categories + Settings move into a "More" overflow or Settings page.<br>
+      <strong>Pro:</strong> Budgets and Goals are first-class. <strong>Con:</strong> 5+ tabs gets crowded on mobile.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>One new tab: Budget & Goals combined</h3>
+      <p>Nav becomes: Dashboard · Transactions · Budget · Reports · Settings<br>
+      A single "Budget" page handles both spending limits and savings goals.<br>
+      <strong>Pro:</strong> Clean 5-tab nav, no overflow. <strong>Con:</strong> Two distinct concepts in one page.</p>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Integrate into existing pages</h3>
+      <p>Budgets live inside Categories (set a limit per category). Goals live on Dashboard as a new section. Search + filters added to Transactions page.<br>
+      <strong>Pro:</strong> No nav changes needed. <strong>Con:</strong> Features harder to discover.</p>
+    </div>
+  </div>
+</div>

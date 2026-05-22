@@ -1,0 +1,70 @@
+<h2>How should Search + Date Range fit into Transactions?</h2>
+<p class="subtitle">Currently the Transactions page has type pills (All / Expenses / Income) and a category dropdown. We're adding text search and date range. Where do they go?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0f1221;">
+      <!-- Search bar on top, then filters below -->
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="color:#555;font-size:14px;">🔍</span>
+        <span style="color:#555;font-size:13px;">Search by note or merchant...</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;">
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <div style="background:rgba(167,139,250,0.2);border:1px solid rgba(167,139,250,0.3);border-radius:10px;padding:5px 12px;color:#a78bfa;font-size:12px;font-weight:600;">All</div>
+          <div style="border-radius:10px;padding:5px 12px;color:#555;font-size:12px;">Expenses</div>
+          <div style="border-radius:10px;padding:5px 12px;color:#555;font-size:12px;">Income</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 10px;color:#555;font-size:12px;">📂 All categories</div>
+          <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 10px;color:#555;font-size:12px;">📅 This month</div>
+        </div>
+      </div>
+      <div style="margin-top:8px;background:rgba(255,255,255,0.05);border-radius:12px;overflow:hidden;">
+        <div style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;"><span style="color:#fff;font-size:12px;">🍔 Lunch</span><span style="color:#f87171;font-size:12px;">-$14.50</span></div>
+        <div style="padding:12px 14px;display:flex;justify-content:space-between;"><span style="color:#fff;font-size:12px;">🚗 Fuel</span><span style="color:#f87171;font-size:12px;">-$58.00</span></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Search bar on top, filters row below</h3>
+      <p>Persistent search bar above the filter card. Category + date range sit side by side in a 2-column row inside the filter card.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0f1221;">
+      <!-- Header with search icon that expands -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <div>
+          <div style="color:#fff;font-size:16px;font-weight:700;">Transactions</div>
+          <div style="color:#555;font-size:11px;">24 records</div>
+        </div>
+        <div style="display:flex;gap:6px;">
+          <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:8px;color:#aaa;font-size:14px;">🔍</div>
+          <div style="background:rgba(167,139,250,0.2);border-radius:10px;padding:8px 14px;color:#a78bfa;font-size:12px;font-weight:600;">+ Add</div>
+        </div>
+      </div>
+      <!-- Expanded search (shown as active state) -->
+      <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+        <span style="color:#a78bfa;font-size:14px;">🔍</span>
+        <span style="color:#666;font-size:13px;">lunch</span>
+        <span style="color:#555;font-size:13px;margin-left:auto;">✕</span>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:12px 14px;">
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <div style="background:rgba(167,139,250,0.2);border:1px solid rgba(167,139,250,0.3);border-radius:10px;padding:5px 12px;color:#a78bfa;font-size:12px;font-weight:600;">All</div>
+          <div style="border-radius:10px;padding:5px 12px;color:#555;font-size:12px;">Expenses</div>
+          <div style="border-radius:10px;padding:5px 12px;color:#555;font-size:12px;">Income</div>
+          <div style="margin-left:auto;border-radius:10px;padding:5px 12px;color:#555;font-size:12px;background:rgba(255,255,255,0.04);">📅 May</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:8px 10px;color:#555;font-size:12px;">📂 All categories</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Search icon in header, expands inline</h3>
+      <p>Search icon lives in the header next to Add. Tapping it expands a search bar below the header. Date range is a compact pill in the type-filter row.</p>
+    </div>
+  </div>
+
+</div>

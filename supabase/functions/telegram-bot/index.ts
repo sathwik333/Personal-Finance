@@ -1,4 +1,3 @@
-import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const BOT_TOKEN = Deno.env.get('TELEGRAM_BOT_TOKEN')!
@@ -77,10 +76,13 @@ async function findCategory(userId: string, hint: string) {
   return data?.[0] ?? null
 }
 
-serve(async (req) => {
-  // Verify webhook secret
+const OK = () => new Response('OK', { headers: { 'X-Content-Type-Options': 'nosniff' } })
+
+Deno.serve(async (req) => {
   const secret = req.headers.get('X-Telegram-Bot-Api-Secret-Token')
-  if (secret !== WEBHOOK_SECRET) return new Response('Unauthorized', { status: 401 })
+  if (!WEBHOOK_SECRET || secret !== WEBHOOK_SECRET) {
+    return new Response('Unauthorized', { status: 401 })
+  }
 
   const body = await req.json()
   const message = body.message
@@ -88,7 +90,7 @@ serve(async (req) => {
     if (message?.chat?.id) {
       await sendMessage(message.chat.id, '⚠️ Please send text messages only.')
     }
-    return new Response('OK')
+    return OK()
   }
 
   const chatId: number = message.chat.id
@@ -97,7 +99,7 @@ serve(async (req) => {
   // /start command
   if (text === '/start') {
     await sendMessage(chatId, '👋 Welcome! Generate a link code in the app Settings → Telegram, then send it here to connect your account.')
-    return new Response('OK')
+    return OK()
   }
 
   // Link code (8 uppercase alphanumeric chars)
@@ -108,14 +110,14 @@ serve(async (req) => {
     } else {
       await sendMessage(chatId, '❌ Invalid or expired code. Generate a new one in the app.')
     }
-    return new Response('OK')
+    return OK()
   }
 
   // All other commands require linked account
   const user = await getUserByTelegramId(chatId)
   if (!user) {
     await sendMessage(chatId, '⚠️ Account not linked. Go to Settings → Telegram in the app to get a link code.')
-    return new Response('OK')
+    return OK()
   }
 
   // /summary command
@@ -135,7 +137,7 @@ serve(async (req) => {
     await sendMessage(chatId,
       `📊 <b>This month</b>\nIncome: <b>$${income.toFixed(2)}</b>\nSpent: <b>$${spent.toFixed(2)}</b>\nBalance: <b>${balance >= 0 ? '+' : ''}$${balance.toFixed(2)}</b>`
     )
-    return new Response('OK')
+    return OK()
   }
 
   // /categories command
@@ -147,7 +149,7 @@ serve(async (req) => {
       .order('name')
     const list = cats?.map(c => `${c.icon} ${c.name.toLowerCase()}`).join('\n') ?? ''
     await sendMessage(chatId, `📂 <b>Categories:</b>\n${list}`)
-    return new Response('OK')
+    return OK()
   }
 
   // Transaction logging
@@ -156,7 +158,7 @@ serve(async (req) => {
     await sendMessage(chatId,
       '❓ I didn\'t understand that.\n\nTry:\n<code>spent 45 food lunch</code>\n<code>income 2000 salary</code>\n<code>/summary</code>\n<code>/categories</code>'
     )
-    return new Response('OK')
+    return OK()
   }
 
   const category = await findCategory(user.id, parsed.categoryHint)
@@ -173,7 +175,7 @@ serve(async (req) => {
 
   if (insertError) {
     await sendMessage(chatId, '❌ Failed to log transaction. Please try again.')
-    return new Response('OK')
+    return OK()
   }
 
   const emoji = parsed.type === 'income' ? '💰' : '💸'
@@ -182,5 +184,5 @@ serve(async (req) => {
     `${emoji} Logged: <b>$${parsed.amount.toFixed(2)}</b> — ${catName}${parsed.note ? ` (${parsed.note})` : ''}`
   )
 
-  return new Response('OK')
+  return OK()
 })

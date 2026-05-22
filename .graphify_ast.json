@@ -1,0 +1,1827 @@
+{
+  "nodes": [
+    {
+      "id": "postcss_config",
+      "label": "postcss.config.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\postcss.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "tailwind_config",
+      "label": "tailwind.config.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\tailwind.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "vite_config",
+      "label": "vite.config.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\vite.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "app",
+      "label": "App.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\App.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_app",
+      "label": "App()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\App.jsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "main",
+      "label": "main.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\main.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "router",
+      "label": "router.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "router_protectedroute",
+      "label": "ProtectedRoute()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "router_router",
+      "label": "Router()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L28"
+    },
+    {
+      "id": "test_setup",
+      "label": "test-setup.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\test-setup.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "bottomnav",
+      "label": "BottomNav.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\BottomNav.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "bottomnav_bottomnav",
+      "label": "BottomNav()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\BottomNav.jsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "categorybadge",
+      "label": "CategoryBadge.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\CategoryBadge.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "categorybadge_categorybadge",
+      "label": "CategoryBadge()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\CategoryBadge.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "donutchart",
+      "label": "DonutChart.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\DonutChart.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "donutchart_donutchart",
+      "label": "DonutChart()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\DonutChart.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "layout",
+      "label": "Layout.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "layout_layout",
+      "label": "Layout()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "skeleton",
+      "label": "Skeleton.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "skeleton_skeleton",
+      "label": "Skeleton()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "skeleton_skeletonstatcards",
+      "label": "SkeletonStatCards()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "skeleton_skeletontransactions",
+      "label": "SkeletonTransactions()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L18"
+    },
+    {
+      "id": "skeleton_skeletonchart",
+      "label": "SkeletonChart()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L38"
+    },
+    {
+      "id": "spendingbarchart",
+      "label": "SpendingBarChart.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\SpendingBarChart.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "spendingbarchart_spendingbarchart",
+      "label": "SpendingBarChart()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\SpendingBarChart.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "statcard",
+      "label": "StatCard.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\StatCard.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "statcard_statcard",
+      "label": "StatCard()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\StatCard.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "topnav",
+      "label": "TopNav.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "topnav_topnav",
+      "label": "TopNav()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "transactionform",
+      "label": "TransactionForm.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "transactionform_transactionform",
+      "label": "TransactionForm()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "transactionitem",
+      "label": "TransactionItem.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "transactionitem_transactionitem",
+      "label": "TransactionItem()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "trendlinechart",
+      "label": "TrendLineChart.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TrendLineChart.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "trendlinechart_trendlinechart",
+      "label": "TrendLineChart()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\components\\TrendLineChart.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "useauth",
+      "label": "useAuth.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "useauth_authprovider",
+      "label": "AuthProvider()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "useauth_useauth",
+      "label": "useAuth()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L52"
+    },
+    {
+      "id": "usecategories",
+      "label": "useCategories.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "usecategories_usecategories",
+      "label": "useCategories()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L5"
+    },
+    {
+      "id": "usetransactions",
+      "label": "useTransactions.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "usetransactions_computesummary",
+      "label": "computeSummary()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L6"
+    },
+    {
+      "id": "usetransactions_usetransactions",
+      "label": "useTransactions()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L21"
+    },
+    {
+      "id": "usetransactions_test",
+      "label": "useTransactions.test.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "supabase",
+      "label": "supabase.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\supabase.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils",
+      "label": "utils.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "utils_formatcurrency",
+      "label": "formatCurrency()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L3"
+    },
+    {
+      "id": "utils_formatdate",
+      "label": "formatDate()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L7"
+    },
+    {
+      "id": "utils_groupbycategory",
+      "label": "groupByCategory()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "utils_getmonthrange",
+      "label": "getMonthRange()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L25"
+    },
+    {
+      "id": "utils_getweekrange",
+      "label": "getWeekRange()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L33"
+    },
+    {
+      "id": "utils_calcbalance",
+      "label": "calcBalance()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L40"
+    },
+    {
+      "id": "utils_normalizehex",
+      "label": "normalizeHex()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L46"
+    },
+    {
+      "id": "utils_test",
+      "label": "utils.test.js",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.test.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "categories",
+      "label": "Categories.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "categories_categories",
+      "label": "Categories()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "dashboard",
+      "label": "Dashboard.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "dashboard_dashboard",
+      "label": "Dashboard()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "login",
+      "label": "Login.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "login_login",
+      "label": "Login()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "reports",
+      "label": "Reports.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "reports_reports",
+      "label": "Reports()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L11"
+    },
+    {
+      "id": "settings",
+      "label": "Settings.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "settings_generatecode",
+      "label": "generateCode()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "settings_settings",
+      "label": "Settings()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L13"
+    },
+    {
+      "id": "signup",
+      "label": "Signup.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "signup_signup",
+      "label": "Signup()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "transactions",
+      "label": "Transactions.jsx",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "transactions_transactions",
+      "label": "Transactions()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "index",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "index_sendmessage",
+      "label": "sendMessage()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "index_parsemessage",
+      "label": "parseMessage()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L25"
+    },
+    {
+      "id": "index_getuserbytelegramid",
+      "label": "getUserByTelegramId()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "index_linkaccount",
+      "label": "linkAccount()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L53"
+    },
+    {
+      "id": "index_findcategory",
+      "label": "findCategory()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L68"
+    },
+    {
+      "id": "index_ok",
+      "label": "OK()",
+      "file_type": "code",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L79"
+    }
+  ],
+  "edges": [
+    {
+      "source": "vite_config",
+      "target": "vite",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\vite.config.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "vite_config",
+      "target": "plugin_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\vite.config.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\App.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "router",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\App.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app",
+      "target": "app_app",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\App.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "main",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\main.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "main",
+      "target": "client",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\main.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "main",
+      "target": "index_css",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\main.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "main",
+      "target": "app_jsx",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\main.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "layout",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "login",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "signup",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "dashboard",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "transactions",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "reports",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "categories",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "settings",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "router_protectedroute",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "router",
+      "target": "router_router",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\router.jsx",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "test_setup",
+      "target": "jest_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\test-setup.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "bottomnav",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\BottomNav.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "bottomnav",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\BottomNav.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "bottomnav",
+      "target": "bottomnav_bottomnav",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\BottomNav.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "categorybadge",
+      "target": "categorybadge_categorybadge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\CategoryBadge.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "donutchart",
+      "target": "recharts",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\DonutChart.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "donutchart",
+      "target": "donutchart_donutchart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\DonutChart.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "layout",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "layout",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "layout",
+      "target": "topnav",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "layout",
+      "target": "bottomnav",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "layout",
+      "target": "layout_layout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Layout.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "skeleton",
+      "target": "skeleton_skeleton",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "skeleton",
+      "target": "skeleton_skeletonstatcards",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "skeleton",
+      "target": "skeleton_skeletontransactions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "skeleton",
+      "target": "skeleton_skeletonchart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\Skeleton.jsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "spendingbarchart",
+      "target": "recharts",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\SpendingBarChart.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "spendingbarchart",
+      "target": "spendingbarchart_spendingbarchart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\SpendingBarChart.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "statcard",
+      "target": "statcard_statcard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\StatCard.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "topnav",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "topnav",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "topnav",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "topnav",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "topnav",
+      "target": "topnav_topnav",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TopNav.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "react_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "usecategories",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "date_fns",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionform",
+      "target": "transactionform_transactionform",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionForm.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionitem",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionitem",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionitem",
+      "target": "categorybadge",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "transactionitem",
+      "target": "transactionitem_transactionitem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TransactionItem.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "trendlinechart",
+      "target": "recharts",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TrendLineChart.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "trendlinechart",
+      "target": "trendlinechart_trendlinechart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\components\\TrendLineChart.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "useauth",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "useauth",
+      "target": "supabase",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "useauth",
+      "target": "useauth_authprovider",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "useauth",
+      "target": "useauth_useauth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useAuth.jsx",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "usecategories",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "usecategories",
+      "target": "supabase",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "usecategories",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "usecategories",
+      "target": "usecategories_usecategories",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useCategories.js",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "supabase",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "usetransactions_computesummary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions",
+      "target": "usetransactions_usetransactions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions_usetransactions",
+      "target": "usetransactions_computesummary",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.js",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.test.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "usetransactions_test",
+      "target": "usetransactions",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\hooks\\useTransactions.test.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "supabase",
+      "target": "supabase_js",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\supabase.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "date_fns",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_formatcurrency",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_formatdate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_groupbycategory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_getmonthrange",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_getweekrange",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_calcbalance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "utils",
+      "target": "utils_normalizehex",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.js",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_test",
+      "target": "vitest",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.test.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "utils_test",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\lib\\utils.test.js",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "react_colorful",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "usecategories",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "categories",
+      "target": "categories_categories",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Categories.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "usetransactions",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "statcard",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "donutchart",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "transactionitem",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "transactionform",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "dashboard",
+      "target": "dashboard_dashboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Dashboard.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "login",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "login",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "login",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "login",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "login",
+      "target": "login_login",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Login.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "date_fns",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "usetransactions",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "spendingbarchart",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "trendlinechart",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "reports",
+      "target": "reports_reports",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Reports.jsx",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "supabase",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "settings_generatecode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "settings",
+      "target": "settings_settings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Settings.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "signup",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "signup",
+      "target": "react_router_dom",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "signup",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "signup",
+      "target": "useauth",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "signup",
+      "target": "signup_signup",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Signup.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "lucide_react",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "usetransactions",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "usecategories",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "transactionform",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "transactionitem",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "skeleton",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "transactions",
+      "target": "transactions_transactions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\src\\pages\\Transactions.jsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "supabase_js_2",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_sendmessage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_parsemessage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_getuserbytelegramid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_linkaccount",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_findcategory",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "index",
+      "target": "index_ok",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "d:\\Personal Finance\\supabase\\functions\\telegram-bot\\index.ts",
+      "source_location": "L79",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

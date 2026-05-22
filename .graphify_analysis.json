@@ -1,0 +1,335 @@
+{
+  "communities": {
+    "0": [
+      "app",
+      "app_app",
+      "categories",
+      "categories_categories",
+      "login",
+      "login_login",
+      "router",
+      "router_protectedroute",
+      "router_router",
+      "settings",
+      "settings_generatecode",
+      "settings_settings",
+      "signup",
+      "signup_signup",
+      "supabase",
+      "transactionform",
+      "transactionform_transactionform",
+      "transactions",
+      "transactions_transactions",
+      "useauth",
+      "useauth_authprovider",
+      "useauth_useauth",
+      "usecategories",
+      "usecategories_usecategories"
+    ],
+    "1": [
+      "app_jsx",
+      "categories_page",
+      "category_badge",
+      "color_picker_task2",
+      "color_picker_task3",
+      "color_picker_task4",
+      "compute_summary",
+      "dashboard_page",
+      "inline_edit_ui",
+      "main",
+      "normalize_hex",
+      "router_jsx",
+      "settings_page",
+      "stat_card",
+      "supabase_client",
+      "task3_utils",
+      "transaction_form",
+      "transaction_item",
+      "transactions_page",
+      "update_category",
+      "use_auth_hook",
+      "use_categories_hook",
+      "use_transactions_hook",
+      "utils_js"
+    ],
+    "2": [
+      "db_budgets",
+      "db_categories",
+      "db_transactions",
+      "db_users",
+      "deploy_yml",
+      "github_pages",
+      "migration_001",
+      "rationale_free_hosting",
+      "rationale_rls",
+      "rls_policy",
+      "supabase_backend",
+      "system_categories",
+      "task13_telegram",
+      "task14_deploy",
+      "task2_schema",
+      "telegram_bot",
+      "telegram_linking"
+    ],
+    "3": [
+      "categorybadge",
+      "categorybadge_categorybadge",
+      "dashboard",
+      "dashboard_dashboard",
+      "donutchart",
+      "donutchart_donutchart",
+      "skeleton",
+      "skeleton_skeleton",
+      "skeleton_skeletonchart",
+      "skeleton_skeletonstatcards",
+      "skeleton_skeletontransactions",
+      "statcard",
+      "statcard_statcard",
+      "transactionitem",
+      "transactionitem_transactionitem"
+    ],
+    "4": [
+      "usetransactions",
+      "usetransactions_computesummary",
+      "usetransactions_test",
+      "usetransactions_usetransactions",
+      "utils",
+      "utils_calcbalance",
+      "utils_formatcurrency",
+      "utils_formatdate",
+      "utils_getmonthrange",
+      "utils_getweekrange",
+      "utils_groupbycategory",
+      "utils_normalizehex",
+      "utils_test",
+      "utils_test_js",
+      "vitest"
+    ],
+    "5": [
+      "bar_chart",
+      "csv_export",
+      "dark_ui_theme",
+      "donut_chart",
+      "line_chart",
+      "recharts",
+      "reports",
+      "reports_page",
+      "reports_reports",
+      "spendingbarchart",
+      "spendingbarchart_spendingbarchart",
+      "tailwind_config",
+      "task1_scaffold",
+      "trendlinechart",
+      "trendlinechart_trendlinechart"
+    ],
+    "6": [
+      "index",
+      "index_findcategory",
+      "index_getuserbytelegramid",
+      "index_linkaccount",
+      "index_ok",
+      "index_parsemessage",
+      "index_sendmessage"
+    ],
+    "7": [
+      "bottomnav",
+      "bottomnav_bottomnav",
+      "layout",
+      "layout_layout",
+      "topnav",
+      "topnav_topnav"
+    ],
+    "8": [
+      "graph_report",
+      "out_of_scope",
+      "plan_color_picker",
+      "plan_pf_app",
+      "spec_color_picker",
+      "spec_pf_design"
+    ],
+    "9": [
+      "color_picker_task1",
+      "color_swatch_old",
+      "hex_color_picker_ui",
+      "rationale_color_wheel",
+      "react_colorful"
+    ],
+    "10": [
+      "bottom_nav",
+      "layout_jsx",
+      "responsive_nav",
+      "top_nav"
+    ],
+    "11": [
+      "postcss_config"
+    ],
+    "12": [
+      "vite_config"
+    ],
+    "13": [
+      "test_setup"
+    ]
+  },
+  "cohesion": {
+    "0": 0.12,
+    "1": 0.15,
+    "2": 0.22,
+    "3": 0.13,
+    "4": 0.15,
+    "5": 0.15,
+    "6": 0.29,
+    "7": 0.33,
+    "8": 0.47,
+    "9": 0.5,
+    "10": 0.67,
+    "11": 1.0,
+    "12": 1.0,
+    "13": 1.0
+  },
+  "gods": [
+    {
+      "id": "db_categories",
+      "label": "Database Table: categories",
+      "edges": 11
+    },
+    {
+      "id": "use_categories_hook",
+      "label": "useCategories Hook (src/hooks/useCategories.js)",
+      "edges": 8
+    },
+    {
+      "id": "use_transactions_hook",
+      "label": "useTransactions Hook (src/hooks/useTransactions.js)",
+      "edges": 8
+    },
+    {
+      "id": "db_transactions",
+      "label": "Database Table: transactions",
+      "edges": 8
+    },
+    {
+      "id": "use_auth_hook",
+      "label": "useAuth Hook (src/hooks/useAuth.js)",
+      "edges": 7
+    },
+    {
+      "id": "router_jsx",
+      "label": "src/router.jsx (Protected Routes)",
+      "edges": 7
+    },
+    {
+      "id": "dashboard_page",
+      "label": "Dashboard Page (src/pages/Dashboard.jsx)",
+      "edges": 7
+    },
+    {
+      "id": "migration_001",
+      "label": "supabase/migrations/001_initial.sql",
+      "edges": 7
+    },
+    {
+      "id": "recharts",
+      "label": "Recharts (Charting Library)",
+      "edges": 7
+    },
+    {
+      "id": "hex_color_picker_ui",
+      "label": "HexColorPicker UI Component (Color Wheel)",
+      "edges": 6
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Personal Finance Tracker \u00e2\u20ac\u201d Implementation Plan",
+      "target": "Personal Finance Tracker \u00e2\u20ac\u201d Design Spec",
+      "source_files": [
+        "docs/superpowers/plans/2026-04-21-personal-finance-app.md",
+        "docs/superpowers/specs/2026-04-21-personal-finance-design.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Graph Report \u00e2\u20ac\u201d d:/Personal Finance (2026-04-21)",
+      "target": "Personal Finance Tracker \u00e2\u20ac\u201d Implementation Plan",
+      "source_files": [
+        "graphify-out/GRAPH_REPORT.md",
+        "docs/superpowers/plans/2026-04-21-personal-finance-app.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "Categories: Color Picker & Edit Feature \u00e2\u20ac\u201d Implementation Plan",
+      "target": "Categories: Color Picker & Edit Feature \u00e2\u20ac\u201d Design Spec",
+      "source_files": [
+        "docs/superpowers/plans/2026-04-29-categories-color-picker-edit.md",
+        "docs/superpowers/specs/2026-04-29-categories-color-picker-edit-design.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Graph Report \u00e2\u20ac\u201d d:/Personal Finance (2026-04-21)",
+      "target": "Personal Finance Tracker \u00e2\u20ac\u201d Design Spec",
+      "source_files": [
+        "graphify-out/GRAPH_REPORT.md",
+        "docs/superpowers/specs/2026-04-21-personal-finance-design.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "connects across different repos/directories"
+    },
+    {
+      "source": "useCategories Hook (src/hooks/useCategories.js)",
+      "target": "Database Table: categories",
+      "source_files": [
+        "docs/superpowers/plans/2026-04-21-personal-finance-app.md",
+        "docs/superpowers/specs/2026-04-21-personal-finance-design.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "shares_data_with",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `Recharts (Charting Library)` connect `Community 5` to `Community 3`?",
+      "why": "High betweenness centrality (0.238) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `HexColorPicker UI Component (Color Wheel)` connect `Community 9` to `Community 1`?",
+      "why": "High betweenness centrality (0.152) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `react-colorful (HexColorPicker Dependency)` connect `Community 9` to `Community 0`?",
+      "why": "High betweenness centrality (0.147) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 3 inferred relationships involving `Database Table: categories` (e.g. with `Categories Page (src/pages/Categories.jsx)` and `useCategories Hook (src/hooks/useCategories.js)`) actually correct?",
+      "why": "`Database Table: categories` has 3 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 3 inferred relationships involving `Database Table: transactions` (e.g. with `useTransactions Hook (src/hooks/useTransactions.js)` and `Dashboard Page (src/pages/Dashboard.jsx)`) actually correct?",
+      "why": "`Database Table: transactions` has 3 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `StatCard Component`, `Rationale: RLS for Per-User Data Isolation`, `Out of Scope Decisions (OAuth, Bank Import, Multi-currency)` to the rest of the system?",
+      "why": "8 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `Community 0` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.12 - nodes in this community are weakly interconnected."
+    }
+  ]
+}

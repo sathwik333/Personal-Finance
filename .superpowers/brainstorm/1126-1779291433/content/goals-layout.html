@@ -1,0 +1,98 @@
+<h2>How should Savings Goals work?</h2>
+<p class="subtitle">A goal is a target amount you want to reach (e.g. "Vacation fund: $3,000 by December"). How should they look and how do you track progress?</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0f1221;">
+      <!-- Goal cards with linear progress -->
+      <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:14px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <div style="color:#fff;font-size:13px;font-weight:700;">✈️ Vacation Fund</div>
+            <div style="color:#888;font-size:11px;">Target: Dec 2026</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#a78bfa;font-size:14px;font-weight:700;">$1,800</div>
+            <div style="color:#888;font-size:11px;">of $3,000</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:99px;height:8px;margin-bottom:5px;">
+          <div style="background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:99px;height:8px;width:60%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <div style="color:#888;font-size:11px;">60% saved</div>
+          <div style="color:#34d399;font-size:11px;">On track</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:14px;margin-bottom:8px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+          <div>
+            <div style="color:#fff;font-size:13px;font-weight:700;">🏠 Emergency Fund</div>
+            <div style="color:#888;font-size:11px;">No deadline</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="color:#a78bfa;font-size:14px;font-weight:700;">$800</div>
+            <div style="color:#888;font-size:11px;">of $5,000</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:99px;height:8px;margin-bottom:5px;">
+          <div style="background:linear-gradient(90deg,#7c3aed,#a78bfa);border-radius:99px;height:8px;width:16%;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <div style="color:#888;font-size:11px;">16% saved</div>
+          <div style="color:#f87171;font-size:11px;">Just started</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.12);border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <span style="color:#555;font-size:20px;">+</span>
+        <span style="color:#555;font-size:12px;">New goal</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Goal cards with progress bar</h3>
+      <p>Each goal is a card with a name, target amount, deadline, progress bar, and a status label. Simple and familiar.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:16px;background:#0f1221;">
+      <!-- Goal cards with circular progress -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:14px;text-align:center;">
+          <div style="position:relative;width:64px;height:64px;margin:0 auto 8px;">
+            <svg viewBox="0 0 64 64" style="width:64px;height:64px;transform:rotate(-90deg);">
+              <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="7"/>
+              <circle cx="32" cy="32" r="26" fill="none" stroke="#a78bfa" stroke-width="7" stroke-dasharray="163" stroke-dashoffset="65" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#a78bfa;font-size:12px;font-weight:700;">60%</div>
+          </div>
+          <div style="color:#fff;font-size:12px;font-weight:600;">✈️ Vacation</div>
+          <div style="color:#888;font-size:11px;">$1,800 / $3,000</div>
+          <div style="color:#34d399;font-size:10px;margin-top:3px;">Dec 2026</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border-radius:14px;padding:14px;text-align:center;">
+          <div style="position:relative;width:64px;height:64px;margin:0 auto 8px;">
+            <svg viewBox="0 0 64 64" style="width:64px;height:64px;transform:rotate(-90deg);">
+              <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="7"/>
+              <circle cx="32" cy="32" r="26" fill="none" stroke="#a78bfa" stroke-width="7" stroke-dasharray="163" stroke-dashoffset="137" stroke-linecap="round"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#a78bfa;font-size:12px;font-weight:700;">16%</div>
+          </div>
+          <div style="color:#fff;font-size:12px;font-weight:600;">🏠 Emergency</div>
+          <div style="color:#888;font-size:11px;">$800 / $5,000</div>
+          <div style="color:#888;font-size:10px;margin-top:3px;">No deadline</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px dashed rgba(255,255,255,0.12);border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:center;gap:6px;grid-column:span 2;">
+          <span style="color:#555;font-size:20px;">+</span>
+          <span style="color:#555;font-size:12px;">New goal</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Circular progress rings grid</h3>
+      <p>Each goal is a compact tile with a circular progress ring. More visual, works great as a 2-column grid. Matches the donut chart aesthetic already in the app.</p>
+    </div>
+  </div>
+
+</div>

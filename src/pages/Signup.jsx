@@ -15,7 +15,7 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    if (password.length < 6) { setError('Password must be at least 6 characters'); return }
+    if (password.length < 8) { setError('Password must be at least 8 characters'); return }
     if (password !== confirm) { setError('Passwords do not match'); return }
     setError('')
     setLoading(true)
@@ -89,7 +89,7 @@ export default function Signup() {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 className="glass-input w-full rounded-xl px-4 py-3 pr-12 text-sm"
-                placeholder="Min. 6 characters"
+                placeholder="Min. 8 characters"
                 autoComplete="new-password"
               />
               <button

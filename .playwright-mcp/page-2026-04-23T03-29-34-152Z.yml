@@ -1,0 +1,1 @@
+- generic [ref=e2]: "{\"ok\":true,\"result\":{\"url\":\"https://xlswdwjncekuvgqkhqbr.supabase.co/functions/v1/quick-task\",\"has_custom_certificate\":false,\"pending_update_count\":2,\"last_error_date\":1776914955,\"last_error_message\":\"Wrong response from the webhook: 401 Unauthorized\",\"max_connections\":40,\"ip_address\":\"172.64.149.246\"}}"
